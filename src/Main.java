@@ -230,7 +230,7 @@ public class Main {
 
         psDelete.executeUpdate();
         psDelete.close();
-        //test
+        //testing
     }
 
 }
