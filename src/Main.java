@@ -72,7 +72,7 @@ public class Main {
             System.out.println("Nama Obat: " + nama_obat);
             System.out.println("Stock: " + stock);
             System.out.println("Harga: " + harga);
-            System.out.println("Tanggal Masuk: " + tanggal_masuk);
+            System.out.println("Tanggal Masuk (YYYY/MM/DD): " + tanggal_masuk);
             System.out.println("Expired: " + expired);
             System.out.println("No. Batch: " + no_batch);
             System.out.println("--------------------------------");
@@ -89,9 +89,9 @@ public class Main {
         System.out.println("Masukan Harga Obat: ");
         double harga = scanner.nextDouble();
         scanner.nextLine();
-        System.out.println("Masukan Tanggal Masuk Obat: ");
+        System.out.println("Masukan Tanggal Masuk Obat (YYYY/MM/DD): ");
         String tanggal_masuk = scanner.nextLine();
-        System.out.println("Masukan Tanggal Expired Obat: ");
+        System.out.println("Masukan Tanggal Expired Obat (YYYY/MM/DD): ");
         String expired = scanner.nextLine();
         System.out.println("Masukan Nomor Batch Obat: ");
         String no_batch = scanner.nextLine();
