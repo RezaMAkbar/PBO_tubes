@@ -1,4 +1,4 @@
-
+package ConsoleApp;
 
 import java.sql.*;
 import java.util.InputMismatchException;
@@ -170,7 +170,7 @@ public class Main {
                         psUpdate.close();
                         break;
                     case 4:
-                        System.out.println("Masukan Tanggal Masuk Obat: ");
+                        System.out.println("Masukan Tanggal Masuk Obat (YYYY/MM/DD): ");
                         String tanggal_masuk = scanner.nextLine();
                         queryUpdate = "UPDATE obat SET tanggal_masuk = ? WHERE id = ?";
                         psUpdate = conn.prepareStatement(queryUpdate);
