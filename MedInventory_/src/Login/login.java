@@ -51,7 +51,7 @@ public class login extends javax.swing.JFrame {
         label6.setForeground(new java.awt.Color(18, 118, 248));
         label6.setPreferredSize(new java.awt.Dimension(60, 60));
         label6.setSize(new java.awt.Dimension(100, 100));
-        label6.setText("Login");
+        label6.setText("MedInventory_/src/Login");
 
         jLabel1.setText("jLabel1");
 
@@ -66,7 +66,7 @@ public class login extends javax.swing.JFrame {
         label2.setSize(new java.awt.Dimension(100, 100));
         label2.setText("MedInventory");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Login/logo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MedInventory_/src/Login/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -99,7 +99,7 @@ public class login extends javax.swing.JFrame {
         label1.setForeground(new java.awt.Color(18, 118, 248));
         label1.setPreferredSize(new java.awt.Dimension(60, 60));
         label1.setSize(new java.awt.Dimension(100, 100));
-        label1.setText("Login");
+        label1.setText("MedInventory_/src/Login");
 
         jTextField1.setForeground(new java.awt.Color(19, 118, 248));
         jTextField1.setText("E-mail");
@@ -130,7 +130,7 @@ public class login extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(19, 188, 248));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Login");
+        jButton2.setText("MedInventory_/src/Login");
         jButton2.setBorder(null);
         jButton2.setBounds(new java.awt.Rectangle(100, 100, 100, 100));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
