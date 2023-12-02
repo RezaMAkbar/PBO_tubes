@@ -264,7 +264,7 @@ public class Login extends javax.swing.JFrame {
             // Handle incorrect credentials, show an error message, etc.
             JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        //
+        // login logic
 
 
     }//GEN-LAST:event_LoginActionPerformed
