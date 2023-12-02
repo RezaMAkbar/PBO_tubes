@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  *
@@ -24,6 +25,8 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        //change / remove this if you have it on another path
+        this.jLabel2.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/LoginAndRegister/logo.png"))));
     }
 
     /**
@@ -255,11 +258,13 @@ public class Login extends javax.swing.JFrame {
             return; // Exit the method without proceeding to the next step
         }
 
-        // Assuming you have a method like checkCredentials in your database class
-        // that returns true if the credentials are correct
+        // true if the credentials are correct
         if (checkCredentials(username, password)) {
-            // If credentials are correct, create an instance of the Register class
+            // If credentials are correct, create an instance of the Main class but since it's currently on testing phase, the class that is shown is regitester
             Registester register = new Registester("Selamat Anda berhasil login");
+
+            // Dispose of the login frame
+            this.dispose();
         } else {
             // Handle incorrect credentials, show an error message, etc.
             JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
