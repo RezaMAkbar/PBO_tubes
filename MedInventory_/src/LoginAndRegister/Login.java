@@ -4,6 +4,15 @@
  */
 package LoginAndRegister;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
+import org.mindrot.jbcrypt.BCrypt;
+
+import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author gede.astugmail.com
@@ -236,6 +245,27 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
+        String username = jTextField1.getText();
+        String password = new String(jPasswordField1.getPassword());
+
+        // Check if the username and password are not empty
+        if (username.isEmpty() || password.isEmpty()) {
+            // Display an error message or take appropriate action
+            JOptionPane.showMessageDialog(this, "Username and password cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+            return; // Exit the method without proceeding to the next step
+        }
+
+        // Assuming you have a method like checkCredentials in your database class
+        // that returns true if the credentials are correct
+        if (checkCredentials(username, password)) {
+            // If credentials are correct, create an instance of the Register class
+            Registester register = new Registester("Selamat Anda berhasil login");
+        } else {
+            // Handle incorrect credentials, show an error message, etc.
+            JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_LoginActionPerformed
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
@@ -245,6 +275,49 @@ public class Login extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+
+    private boolean checkCredentials(String username, String password) {
+        MysqlDataSource dataSource = new MysqlDataSource();
+        String DB_URL = "jdbc:mysql://localhost:3306/pbo_tubes?serverTimezone=Asia/Jakarta";
+        String DB_USERNAME = "root";
+        String DB_PASSWORD = "";
+
+        dataSource.setUrl(DB_URL);
+        dataSource.setUser(DB_USERNAME);
+        dataSource.setPassword(DB_PASSWORD);
+
+        try (Connection conn = dataSource.getConnection()) {
+            String querySelect = "SELECT * FROM users WHERE username=?";
+            try (PreparedStatement psSelect = conn.prepareStatement(querySelect)) {
+                // Set the username parameter in the query
+                psSelect.setString(1, username);
+
+                // Execute the query and retrieve the results
+                try (ResultSet rs = psSelect.executeQuery()) {
+                    if (rs.next()) {
+                        // User with the entered username exists
+                        // Retrieve the hashed password from the database
+                        String hashedPasswordFromDB = rs.getString("password");
+
+                        // Check the entered password against the hashed password using BCrypt
+                        if (BCrypt.checkpw(password, hashedPasswordFromDB)) {
+                            // Passwords match
+                            return true;
+                        }
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle or log the exception appropriately
+        }
+
+        // No matching user or incorrect password
+        return false;
+    }
+
 
     /**
      * @param args the command line arguments
