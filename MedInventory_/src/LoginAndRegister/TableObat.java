@@ -406,7 +406,7 @@ public class TableObat extends javax.swing.JFrame {
     private javax.swing.JTable tableObat;
     // End of variables declaration//GEN-END:variables
 
-    //method and whatnot
+    //method and whatnot.
     private static void showDataObat(@NotNull JTable tableObat) throws SQLException {
         MysqlDataSource dataSource = new MysqlDataSource();
         String DB_URL = "jdbc:mysql://localhost:3306/pbo_tubes?serverTimezone=Asia/Jakarta";

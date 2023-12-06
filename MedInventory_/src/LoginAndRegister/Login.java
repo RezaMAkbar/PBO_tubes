@@ -291,7 +291,7 @@ public class Login extends javax.swing.JFrame {
             e.printStackTrace(); // Handle or log the exception appropriately
         }
 
-        // No matching user or incorrect password
+        // No matching user or incorrect password.
         return false;
     }
 
