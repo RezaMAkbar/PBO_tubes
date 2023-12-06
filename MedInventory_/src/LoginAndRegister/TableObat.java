@@ -4,6 +4,23 @@
  */
 package LoginAndRegister;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Vector;
+
 /**
  *
  * @author gede.astugmail.com
@@ -32,13 +49,13 @@ public class TableObat extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        tambahObat = new javax.swing.JButton();
+        hapusObat = new javax.swing.JButton();
+        daftarObatLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        daftarObat = new javax.swing.JButton();
+        daftarRiwayat = new javax.swing.JButton();
+        daftarStockOpname = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -76,27 +93,35 @@ public class TableObat extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(19, 118, 248));
 
-        jButton1.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(19, 118, 248));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/increase.png"))); // NOI18N
-        jButton1.setText("Tambah Obat Baru");
-        jButton1.setActionCommand("Tambah Obat Baru");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tambahObat.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
+        tambahObat.setForeground(new java.awt.Color(19, 118, 248));
+        tambahObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/increase.png"))); // NOI18N
+        tambahObat.setText("Tambah Obat Baru");
+        tambahObat.setActionCommand("Tambah Obat Baru");
+        tambahObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    tambahObatActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(19, 118, 248));
-        jButton2.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/decrease.png"))); // NOI18N
-        jButton2.setText("Hapus Obat");
-        jButton2.setActionCommand("Hapus Obat");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        hapusObat.setBackground(new java.awt.Color(19, 118, 248));
+        hapusObat.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
+        hapusObat.setForeground(new java.awt.Color(255, 255, 255));
+        hapusObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/decrease.png"))); // NOI18N
+        hapusObat.setText("Hapus Obat");
+        hapusObat.setActionCommand("Hapus Obat");
+        hapusObat.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        hapusObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                try {
+                    hapusObatActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -107,10 +132,10 @@ public class TableObat extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(165, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(tambahObat)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(hapusObat, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
         jPanel2Layout.setVerticalGroup(
@@ -119,15 +144,15 @@ public class TableObat extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tambahObat, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hapusObat, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        jLabel4.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 30)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Daftar Obat - Obatan");
+        daftarObatLabel.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 30)); // NOI18N
+        daftarObatLabel.setForeground(new java.awt.Color(255, 255, 255));
+        daftarObatLabel.setText("Daftar Obat - Obatan");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,7 +160,7 @@ public class TableObat extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jLabel4)
+                .addComponent(daftarObatLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -144,37 +169,37 @@ public class TableObat extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(daftarObatLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton3.setBackground(new java.awt.Color(19, 118, 248));
-        jButton3.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Daftar Obat-Obatan");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        daftarObat.setBackground(new java.awt.Color(19, 118, 248));
+        daftarObat.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        daftarObat.setForeground(new java.awt.Color(255, 255, 255));
+        daftarObat.setText("Daftar Obat-Obatan");
+        daftarObat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                daftarObatActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(19, 118, 248));
-        jButton4.setText("Daftar Riwayat Transaksi");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        daftarRiwayat.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        daftarRiwayat.setForeground(new java.awt.Color(19, 118, 248));
+        daftarRiwayat.setText("Daftar Riwayat Transaksi");
+        daftarRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                daftarRiwayatActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(19, 118, 248));
-        jButton5.setText("Daftar Stock Opname");
-        jButton5.setActionCommand("Daftar Stock Opname");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        daftarStockOpname.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        daftarStockOpname.setForeground(new java.awt.Color(19, 118, 248));
+        daftarStockOpname.setText("Daftar Stock Opname");
+        daftarStockOpname.setActionCommand("Daftar Stock Opname");
+        daftarStockOpname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                daftarStockOpnameActionPerformed(evt);
             }
         });
 
@@ -188,11 +213,11 @@ public class TableObat extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(daftarObat, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(daftarRiwayat)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(daftarStockOpname, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40))
@@ -202,9 +227,9 @@ public class TableObat extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(daftarRiwayat, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(daftarStockOpname, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(daftarObat, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(12, 12, 12))
         );
@@ -240,6 +265,11 @@ public class TableObat extends javax.swing.JFrame {
                 "ID", "Nama Obat", "Tanggal Kadaluarsa", "Jumlah Stock", "Harga", "Actions"
             }
         ));
+        try {
+            showDataObat(tableObat);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         tableObat.setRowHeight(30);
         tableObat.setSelectionBackground(new java.awt.Color(51, 51, 255));
         tableObat.setSelectionForeground(new java.awt.Color(19, 118, 248));
@@ -248,6 +278,12 @@ public class TableObat extends javax.swing.JFrame {
                 tableObatPropertyChange(evt);
             }
         });
+        // Set the cell renderer for the Actions column
+        tableObat.getColumnModel().getColumn(5).setCellRenderer(new ButtonRenderer());
+
+        // Set the cell editor for the Actions column
+        tableObat.getColumnModel().getColumn(5).setCellEditor(new ButtonEditor());
+
         jScrollPane1.setViewportView(tableObat);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -289,29 +325,31 @@ public class TableObat extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void tambahObatActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_tambahObatActionPerformed
+        AddObatTest addObat = new AddObatTest();
+    }//GEN-LAST:event_tambahObatActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void hapusObatActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_hapusObatActionPerformed
+        HapusObat hapusObat1 = new HapusObat();
+    }//GEN-LAST:event_hapusObatActionPerformed
 
     private void tableObatPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tableObatPropertyChange
         // TODO add your handling code here:
     }//GEN-LAST:event_tableObatPropertyChange
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void daftarObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarObatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_daftarObatActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void daftarRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarRiwayatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_daftarRiwayatActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void daftarStockOpnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarStockOpnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_daftarStockOpnameActionPerformed
+
+
 
     /**
      * @param args the command line arguments
@@ -349,17 +387,17 @@ public class TableObat extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton tambahObat;
+    private javax.swing.JButton hapusObat;
+    private javax.swing.JButton daftarObat;
+    private javax.swing.JButton daftarRiwayat;
+    private javax.swing.JButton daftarStockOpname;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel daftarObatLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -367,4 +405,96 @@ public class TableObat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableObat;
     // End of variables declaration//GEN-END:variables
+
+    //method and whatnot
+    private static void showDataObat(@NotNull JTable tableObat) throws SQLException {
+        MysqlDataSource dataSource = new MysqlDataSource();
+        String DB_URL = "jdbc:mysql://localhost:3306/pbo_tubes?serverTimezone=Asia/Jakarta";
+        String DB_USERNAME = "root";
+        String DB_PASSWORD = "";
+
+        dataSource.setUrl(DB_URL);
+        dataSource.setUser(DB_USERNAME);
+        dataSource.setPassword(DB_PASSWORD);
+
+        try (Connection conn = dataSource.getConnection()) {
+            String querySelect = "SELECT * FROM obat";
+            try (PreparedStatement psSelect = conn.prepareStatement(querySelect)) {
+                try (ResultSet rs = psSelect.executeQuery()) {
+                    DefaultTableModel tableModel = (DefaultTableModel) tableObat.getModel();
+                    tableModel.setRowCount(0);
+
+                    while (rs.next()) {
+                        int id = rs.getInt("id");
+                        String nama_obat = rs.getString("nama_obat");
+                        int stock = rs.getInt("stock");
+                        int harga = rs.getInt("harga");
+                        String expired = rs.getString("expired");
+
+                        // Add a new row to the table
+                        Object[] row = {id, nama_obat, expired, stock, harga, "Edit Obat"};
+                        tableModel.addRow(row);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+        public ButtonRenderer() {
+            setOpaque(true);
+            setText("Edit Obat");
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            return this;
+        }
+    }
+
+    class ButtonEditor extends AbstractCellEditor implements TableCellEditor, ActionListener {
+        private JButton button;
+        private String clickedValue;
+        private int clickedRow;
+
+        public ButtonEditor() {
+            button = new JButton("Edit Obat");
+            button.setOpaque(true);
+            button.addActionListener(this);
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return clickedValue;
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            clickedValue = (value != null) ? value.toString() : "Edit Obat";
+            clickedRow = row;
+
+            button.setText(clickedValue);
+            return button;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Retrieve the ID from the clicked row
+            int id = (int) tableObat.getValueAt(clickedRow, 0);
+
+            // Open test frame and pass the ID
+            try {
+                editObatTest editFrame = new editObatTest(id);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+            fireEditingStopped();
+        }
+    }
 }
+
+
+
