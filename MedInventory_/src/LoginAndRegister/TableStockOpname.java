@@ -8,12 +8,12 @@ package LoginAndRegister;
  *
  * @author gede.astugmail.com
  */
-public class TableObat extends javax.swing.JFrame {
+public class TableStockOpname extends javax.swing.JFrame {
 
     /**
      * Creates new form TableObat
      */
-    public TableObat() {
+    public TableStockOpname() {
         initComponents();
     }
 
@@ -80,7 +80,6 @@ public class TableObat extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(19, 118, 248));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/increase.png"))); // NOI18N
         jButton1.setText("Tambah Obat Baru");
-        jButton1.setActionCommand("Tambah Obat Baru");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -92,7 +91,6 @@ public class TableObat extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/decrease.png"))); // NOI18N
         jButton2.setText("Hapus Obat");
-        jButton2.setActionCommand("Hapus Obat");
         jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,7 +169,6 @@ public class TableObat extends javax.swing.JFrame {
         jButton5.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
         jButton5.setForeground(new java.awt.Color(19, 118, 248));
         jButton5.setText("Daftar Stock Opname");
-        jButton5.setActionCommand("Daftar Stock Opname");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -330,20 +327,21 @@ public class TableObat extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TableObat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TableStockOpname.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TableObat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TableStockOpname.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TableObat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TableStockOpname.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TableObat.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TableStockOpname.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TableObat().setVisible(true);
+                new TableStockOpname().setVisible(true);
             }
         });
     }
