@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package LoginAndRegister;
+package Main;
 
 /**
  *
@@ -81,7 +81,7 @@ public class TableStockOpname extends javax.swing.JFrame {
         jButton7.setBackground(new java.awt.Color(19, 118, 248));
         jButton7.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/decrease.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/decrease.png"))); // NOI18N
         jButton7.setText("Hapus Stock Obat Opname");
         jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +92,7 @@ public class TableStockOpname extends javax.swing.JFrame {
 
         jButton9.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
         jButton9.setForeground(new java.awt.Color(19, 118, 248));
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/increase.png"))); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/increase.png"))); // NOI18N
         jButton9.setText("Tambah Stock Obat Opname");
         jButton9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +104,7 @@ public class TableStockOpname extends javax.swing.JFrame {
         jButton10.setBackground(new java.awt.Color(19, 118, 248));
         jButton10.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/refreshWhite.png"))); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/refreshWhite.png"))); // NOI18N
         jButton10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

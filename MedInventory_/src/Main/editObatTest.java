@@ -1,4 +1,4 @@
-package LoginAndRegister;
+package Main;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 
