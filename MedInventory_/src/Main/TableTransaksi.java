@@ -4,6 +4,22 @@
  */
 package Main;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Objects;
+
 /**
  *
  * @author gede.astugmail.com
@@ -32,16 +48,16 @@ public class TableTransaksi extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        daftarObatButton = new javax.swing.JButton();
+        daftarRiwayatButton = new javax.swing.JButton();
+        daftarStockOpnameButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableObat = new javax.swing.JTable();
@@ -78,37 +94,41 @@ public class TableTransaksi extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(19, 118, 248));
 
-        jButton1.setBackground(new java.awt.Color(19, 118, 248));
-        jButton1.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/decrease.png"))); // NOI18N
-        jButton1.setText("Hapus Transaksi");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setBackground(new java.awt.Color(19, 118, 248));
+        deleteButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
+        deleteButton.setForeground(new java.awt.Color(255, 255, 255));
+        deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/decrease.png"))); // NOI18N
+        deleteButton.setText("Hapus Transaksi");
+        deleteButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    deleteButtonActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(19, 118, 248));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/increase.png"))); // NOI18N
-        jButton6.setText("Tambah Transaksi");
-        jButton6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
+        addButton.setForeground(new java.awt.Color(19, 118, 248));
+        addButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/increase.png")))); // NOI18N
+        addButton.setText("Tambah Transaksi");
+        addButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(19, 118, 248));
-        jButton7.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 15)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/refreshWhite.png"))); // NOI18N
-        jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        refreshButton.setBackground(new java.awt.Color(19, 118, 248));
+        refreshButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 15)); // NOI18N
+        refreshButton.setForeground(new java.awt.Color(255, 255, 255));
+        refreshButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/refreshWhite.png")))); // NOI18N
+        refreshButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                refreshButtonActionPerformed(evt);
             }
         });
 
@@ -118,13 +138,13 @@ public class TableTransaksi extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(459, Short.MAX_VALUE)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
@@ -133,10 +153,10 @@ public class TableTransaksi extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(refreshButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(35, 35, 35)))
@@ -167,31 +187,31 @@ public class TableTransaksi extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton3.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(19, 118, 248));
-        jButton3.setText("Daftar Obat-Obatan");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        daftarObatButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        daftarObatButton.setForeground(new java.awt.Color(19, 118, 248));
+        daftarObatButton.setText("Daftar Obat-Obatan");
+        daftarObatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                daftarObatButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(19, 118, 248));
-        jButton4.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Daftar Riwayat Transaksi");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        daftarRiwayatButton.setBackground(new java.awt.Color(19, 118, 248));
+        daftarRiwayatButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        daftarRiwayatButton.setForeground(new java.awt.Color(255, 255, 255));
+        daftarRiwayatButton.setText("Daftar Riwayat Transaksi");
+        daftarRiwayatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                daftarRiwayatButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(19, 118, 248));
-        jButton5.setText("Daftar Stock Opname");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        daftarStockOpnameButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        daftarStockOpnameButton.setForeground(new java.awt.Color(19, 118, 248));
+        daftarStockOpnameButton.setText("Daftar Stock Opname");
+        daftarStockOpnameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                daftarStockOpnameButtonActionPerformed(evt);
             }
         });
 
@@ -199,13 +219,13 @@ public class TableTransaksi extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(19, 118, 248));
         jLabel1.setText("MedInventory");
 
-        jButton8.setBackground(new java.awt.Color(19, 118, 248));
-        jButton8.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("Keluar");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setBackground(new java.awt.Color(19, 118, 248));
+        exitButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        exitButton.setForeground(new java.awt.Color(255, 255, 255));
+        exitButton.setText("Keluar");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
 
@@ -215,13 +235,13 @@ public class TableTransaksi extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(daftarObatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(daftarRiwayatButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(daftarStockOpnameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(40, 40, 40))
@@ -231,11 +251,11 @@ public class TableTransaksi extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(daftarRiwayatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(daftarStockOpnameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(daftarObatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12))
         );
 
@@ -245,40 +265,45 @@ public class TableTransaksi extends javax.swing.JFrame {
         tableObat.setForeground(new java.awt.Color(19, 118, 248));
         tableObat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Type Transaksi", "Nama Obat", "Tanggal Transaksi", "Total Harga", "Jumlah Obat", "Nota / Catatan", "Actions"
+                "ID", "Nama Obat", "Tipe Transaksi", "Tanggal Transaksi", "Penjaga", "Total Harga", "Jumlah Obat", "Nota", "Catatan", "Actions"
             }
         ));
+        try {
+            showData(tableObat);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         tableObat.setRowHeight(30);
         tableObat.setSelectionBackground(new java.awt.Color(51, 51, 255));
-        tableObat.setSelectionForeground(new java.awt.Color(19, 118, 248));
         tableObat.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 tableObatPropertyChange(evt);
             }
         });
         jScrollPane1.setViewportView(tableObat);
+        tableObat.getColumnModel().getColumn(9).setCellRenderer(new ButtonRenderer());
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -321,33 +346,52 @@ public class TableTransaksi extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tableObatPropertyChange
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void daftarObatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarObatButtonActionPerformed
+        TableObat obat = new TableObat();
+        obat.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_daftarObatButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void daftarRiwayatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarRiwayatButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_daftarRiwayatButtonActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void daftarStockOpnameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daftarStockOpnameButtonActionPerformed
+        TableStockOpname stockOpname = new TableStockOpname();
+        stockOpname.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_daftarStockOpnameButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_deleteButtonActionPerformed
+        HapusTransaksi deleteTransaksi = new HapusTransaksi();
+        deleteTransaksi.setVisible(true);
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        AddTransaction transaction = new AddTransaction();
+        transaction.setVisible(true);
+    }//GEN-LAST:event_addButtonActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        try {
+            showData(tableObat);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_refreshButtonActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        int option = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin keluar?", "Exit Confirmation", JOptionPane.YES_NO_OPTION);
+
+        if (option == JOptionPane.YES_OPTION) {
+            //clear the current  frame
+            // Option 1: Dispose of the current frame
+            dispose();
+
+            // Option 2: Terminate the Java Virtual Machine (JVM)
+            System.exit(0);
+        }
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,13 +430,13 @@ public class TableTransaksi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton daftarObatButton;
+    private javax.swing.JButton daftarRiwayatButton;
+    private javax.swing.JButton daftarStockOpnameButton;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton refreshButton;
+    private javax.swing.JButton exitButton;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel1;
@@ -406,4 +450,111 @@ public class TableTransaksi extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableObat;
     // End of variables declaration//GEN-END:variables
+    private void showData(@NotNull JTable tableObat) throws SQLException {
+        MysqlDataSource dataSource = new MysqlDataSource();
+        String DB_URL = "jdbc:mysql://localhost:3306/tubes_pbo?serverTimezone=Asia/Jakarta";
+        String DB_USERNAME = "root";
+        String DB_PASSWORD = "";
+
+        dataSource.setUrl(DB_URL);
+        dataSource.setUser(DB_USERNAME);
+        dataSource.setPassword(DB_PASSWORD);
+
+        try (Connection conn = dataSource.getConnection()) {
+            String querySelect = "SELECT t.*, o.nama_obat " +
+                    "FROM transaksi t " +
+                    "JOIN obat o ON t.id_obat = o.id";
+            try (PreparedStatement psSelect = conn.prepareStatement(querySelect)) {
+                try (ResultSet rs = psSelect.executeQuery()) {
+                    DefaultTableModel tableModel = (DefaultTableModel) tableObat.getModel();
+                    tableModel.setRowCount(0);
+
+                    while (rs.next()) {
+                        int id = rs.getInt("id");
+                        int idObat = rs.getInt("id_obat");
+                        String nama_obat = rs.getString("nama_obat");
+                        String tipe = rs.getString("tipe_transaksi");
+                        String nota = rs.getString("no_nota");
+                        String username = rs.getString("username");
+                        double total_harga_beli = rs.getDouble("total_harga_beli");
+                        double total_harga_jual = rs.getDouble("total_harga_jual");
+                        String tanggal = rs.getString("tanggal");
+                        int jumlahBarang = rs.getInt("jumlah_barang");
+                        String catatan = rs.getString("catatan");
+
+                        if ("pembelian".equals(tipe)) {
+                            Object[] row = {id, nama_obat, tipe, tanggal, username, total_harga_beli, jumlahBarang, nota, catatan, "Edit Data"};
+                            tableModel.addRow(row);
+                        } else if ("penjualan".equals(tipe)) {
+                            Object[] row = {id, nama_obat, tipe, tanggal, username, total_harga_jual, jumlahBarang, nota, catatan, "Edit Data"};
+                            tableModel.addRow(row);
+                        }
+                        ButtonEditor buttonEditor = new ButtonEditor();
+                        buttonEditor.setId(id);
+                        tableObat.getColumnModel().getColumn(9).setCellEditor(buttonEditor);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+        public ButtonRenderer() {
+            setOpaque(true);
+            setText("Edit Data");
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            return this;
+        }
+    }
+
+    class ButtonEditor extends AbstractCellEditor implements TableCellEditor, ActionListener {
+        private JButton button;
+        private String clickedValue;
+        private int clickedRow;
+        private int id;
+
+        public ButtonEditor() {
+            button = new JButton("Edit Data");
+            button.setOpaque(true);
+            button.addActionListener(this);
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return clickedValue;
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            clickedValue = (value != null) ? value.toString() : "Edit Data";
+            clickedRow = row;
+
+            button.setText(clickedValue);
+            return button;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Retrieve the ID from the clicked row
+            int id = (int) tableObat.getValueAt(clickedRow, 0);
+
+            // Open test frame and pass the ID
+            try {
+                EditTransaksi editFrame = new EditTransaksi(id);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+            fireEditingStopped();
+        }
+    }
 }

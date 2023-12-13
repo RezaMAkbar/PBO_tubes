@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  *
@@ -58,7 +59,7 @@ public class Register extends javax.swing.JFrame {
         appNameLabel.setForeground(new java.awt.Color(255, 255, 255));
         appNameLabel.setText("Medinventory");
 
-        imageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LoginAndRegister/logo.png"))); // NOI18N
+        imageLabel.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/logo.png")))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -235,7 +236,7 @@ public class Register extends javax.swing.JFrame {
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
         MysqlDataSource dataSource = new MysqlDataSource();
-        String DB_URL = "jdbc:mysql://localhost:3306/pbo_tubes?serverTimezone=Asia/Jakarta";
+        String DB_URL = "jdbc:mysql://localhost:3306/tubes_pbo?serverTimezone=Asia/Jakarta";
         String DB_USERNAME = "root";
         String DB_PASSWORD = "";
 
@@ -267,7 +268,9 @@ public class Register extends javax.swing.JFrame {
                 psAdd.executeUpdate();
             }
 
-            Registester mainPage = new Registester("Selamat Datang");
+            TableObat mainPage = new TableObat();
+            mainPage.setVisible(true);
+            this.dispose();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
