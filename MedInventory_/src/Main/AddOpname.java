@@ -41,32 +41,33 @@ public class AddOpname extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        totalHargaField = new javax.swing.JTextField();
+        stockKeluarField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        tambahTransaksiButton = new javax.swing.JButton();
+        addOpnameButton = new javax.swing.JButton();
+        addObatButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        namaObatField = new javax.swing.JTextField();
+        tempatSimpanField = new javax.swing.JTextField();
+        tanggalField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jTextField8 = new javax.swing.JTextField();
+        emptyInputButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        keteranganField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        stockMasukField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        stockSisaField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        stockKeluarField = new javax.swing.JTextField();
+        idObatComboBox = new javax.swing.JComboBox<>();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -83,12 +84,12 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(19, 118, 248));
         jLabel7.setText("Total Harga");
 
-        jTextField6.setText("Total Harga");
+        totalHargaField.setText("Total Harga");
 
-        jTextField11.setText("Keluar");
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        stockKeluarField.setText("Keluar");
+        stockKeluarField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                stockKeluarFieldActionPerformed(evt);
             }
         });
 
@@ -100,38 +101,38 @@ public class AddOpname extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(19, 118, 248));
 
-        jButton1.setBackground(new java.awt.Color(19, 118, 248));
-        jButton1.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/transactionWhite.png"))); // NOI18N
-        jButton1.setText("Tambah Transaction");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tambahTransaksiButton.setBackground(new java.awt.Color(19, 118, 248));
+        tambahTransaksiButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
+        tambahTransaksiButton.setForeground(new java.awt.Color(255, 255, 255));
+        tambahTransaksiButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/transactionWhite.png")))); // NOI18N
+        tambahTransaksiButton.setText("Tambah Transaction");
+        tambahTransaksiButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        tambahTransaksiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                tambahTransaksiButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(19, 118, 248));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/infuse.png"))); // NOI18N
-        jButton4.setText("Tambah Opname");
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 3, true));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        addOpnameButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
+        addOpnameButton.setForeground(new java.awt.Color(19, 118, 248));
+        addOpnameButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/infuse.png")))); // NOI18N
+        addOpnameButton.setText("Tambah Opname");
+        addOpnameButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 3, true));
+        addOpnameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                addOpnameButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(19, 118, 248));
-        jButton5.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/obatWhite.png"))); // NOI18N
-        jButton5.setText("Tambah Obat");
-        jButton5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        addObatButton.setBackground(new java.awt.Color(19, 118, 248));
+        addObatButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
+        addObatButton.setForeground(new java.awt.Color(255, 255, 255));
+        addObatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/obatWhite.png"))); // NOI18N
+        addObatButton.setText("Tambah Obat");
+        addObatButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        addObatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                addObatButtonActionPerformed(evt);
             }
         });
 
@@ -141,11 +142,11 @@ public class AddOpname extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addObatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tambahTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addOpnameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -153,32 +154,42 @@ public class AddOpname extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tambahTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addOpnameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addObatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField1.setText("Nama Obat");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+//        namaObatField.setText("Nama Obat");
+//        namaObatField.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                namaObatFieldActionPerformed(evt);
+//            }
+//        });
+        try {
+            List<String> medicineIDs = fetchIDs(connection());
+            idObatComboBox.removeAllItems(); // Clear existing items in the combo box
+
+            for (String medicineID : medicineIDs) {
+                idObatComboBox.addItem(medicineID);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        tempatSimpanField.setText("Tempat Simpan");
+        tempatSimpanField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tempatSimpanFieldActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("Tempat Simpan");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        tanggalField.setText("Tanggal");
+        tanggalField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.setText("Tanggal");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                tanggalFieldActionPerformed(evt);
             }
         });
 
@@ -199,30 +210,41 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/infuse.png"))); // NOI18N
         jLabel6.setText("Tambah Opname");
 
-        jButton2.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(19, 118, 248));
-        jButton2.setText("Kosongkan Input");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 2, true));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        emptyInputButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        emptyInputButton.setForeground(new java.awt.Color(19, 118, 248));
+        emptyInputButton.setText("Kosongkan Input");
+        emptyInputButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 2, true));
+        emptyInputButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                emptyInputButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(19, 118, 248));
-        jButton3.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Batal");
-
-        jButton6.setBackground(new java.awt.Color(19, 118, 248));
-        jButton6.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Simpan");
-
-        jTextField8.setText("Keterangan");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setBackground(new java.awt.Color(19, 118, 248));
+        cancelButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton.setText("Batal");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+
+        saveButton.setBackground(new java.awt.Color(19, 118, 248));
+        saveButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 18)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveButton.setText("Simpan");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        keteranganField.setText("keterangan");
+        keteranganField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keteranganFieldActionPerformed(evt);
             }
         });
 
@@ -230,21 +252,21 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(19, 118, 248));
         jLabel9.setText("Keterangan");
 
-        jTextField9.setText("Masuk");
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        stockMasukField.setText("Masuk");
+        stockMasukField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                stockMasukFieldActionPerformed(evt);
             }
         });
 
         jLabel10.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(19, 118, 248));
-        jLabel10.setText("Masuk & Keluar");
+        jLabel10.setText("Stock Masuk & Keluar");
 
-        jTextField12.setText("Sisa");
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        stockSisaField.setText("Sisa");
+        stockSisaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                stockSisaFieldActionPerformed(evt);
             }
         });
 
@@ -252,10 +274,10 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(19, 118, 248));
         jLabel13.setText("Sisa");
 
-        jTextField13.setText("Keluar");
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        stockKeluarField.setText("Keluar");
+        stockKeluarField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                stockKeluarFieldActionPerformed(evt);
             }
         });
 
@@ -276,7 +298,7 @@ public class AddOpname extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(idObatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel10)
@@ -285,15 +307,15 @@ public class AddOpname extends javax.swing.JFrame {
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(stockMasukField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jTextField12))
+                                            .addComponent(stockKeluarField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(stockSisaField))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addComponent(emptyInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,9 +323,9 @@ public class AddOpname extends javax.swing.JFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                            .addComponent(jTextField8)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(tempatSimpanField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                            .addComponent(keteranganField)
+                            .addComponent(tanggalField, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(207, 207, 207))
         );
         jPanel3Layout.setVerticalGroup(
@@ -313,35 +335,35 @@ public class AddOpname extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idObatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tempatSimpanField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tanggalField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(keteranganField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockMasukField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockKeluarField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockSisaField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emptyInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
@@ -376,23 +398,27 @@ public class AddOpname extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addTransactionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTransactionButtonActionPerformed
-        // TODO add your handling code here:
+    private void tambahTransaksiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTransactionButtonActionPerformed
+        AddTransaction transaction = new AddTransaction();
+        transaction.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_addTransactionButtonActionPerformed
 
     private void addOpnameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOpnameButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addOpnameButtonActionPerformed
 
-    private void addObatButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
+    private void addObatButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        AddObat obat = new AddObat();
+        obat.setVisible(true);
+        this.dispose();
     }                                             
 
     private void emptyInputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emptyInputButtonActionPerformed
         clearTextFields(this.getContentPane());
     }//GEN-LAST:event_emptyInputButtonActionPerformed
 
-    private void hargaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaFieldActionPerformed
+    private void tempatSimpanFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hargaFieldActionPerformed
 
@@ -400,7 +426,7 @@ public class AddOpname extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tanggalFieldActionPerformed
 
-    private void noNotaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNotaFieldActionPerformed
+    private void namaObatFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNotaFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_noNotaFieldActionPerformed
 
@@ -424,7 +450,7 @@ public class AddOpname extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_stockKeluarFieldActionPerformed
 
-    private void sisaStockFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sisaStockFieldActionPerformed
+    private void stockSisaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sisaStockFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sisaStockFieldActionPerformed
 
@@ -435,19 +461,19 @@ public class AddOpname extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_addObatButtonActionPerformed
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
-//        try {
-//            if (isAnyTextFieldEmpty()) {
-//                showErrorMessage("Mohon isi semua field");
-//                return;
-//            }
-//
-//            try (Connection conn = connection()) {
-//                insertToDB(conn);
-//                showSuccessfulMessage("Data berhasil dimasukan");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            if (isAnyTextFieldEmpty()) {
+                showErrorMessage("Mohon isi semua field");
+                return;
+            }
+
+            try (Connection conn = connection()) {
+                insertToDB(conn);
+                showSuccessfulMessage("Data berhasil dimasukan");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -501,12 +527,12 @@ public class AddOpname extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton tambahTransaksiButton;
+    private javax.swing.JButton emptyInputButton;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton addOpnameButton;
+    private javax.swing.JButton addObatButton;
+    private javax.swing.JButton saveButton;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -521,15 +547,15 @@ public class AddOpname extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField namaObatField;
+    private javax.swing.JTextField stockKeluarField;
+    private javax.swing.JTextField stockSisaField;
+    private javax.swing.JTextField stockMasukField;
+    private javax.swing.JTextField tempatSimpanField;
+    private javax.swing.JTextField tanggalField;
+    private javax.swing.JTextField totalHargaField;
+    private javax.swing.JTextField keteranganField;
+    private javax.swing.JComboBox<String> idObatComboBox;
     // End of variables declaration//GEN-END:variables
 
     private void clearTextFields(Container container) {
@@ -543,8 +569,8 @@ public class AddOpname extends javax.swing.JFrame {
         }
     }
     private boolean isAnyTextFieldEmpty() {
-        JTextField[] requiredTextFields = {hargaField, tanggalField, noNotaField, noBatchField, expiredField,
-         keteranganField, stockMasukField, stockKeluarField, sisaStockField};
+        JTextField[] requiredTextFields = {tanggalField, tempatSimpanField, keteranganField, stockMasukField,
+                stockKeluarField, stockSisaField};
 
         for (JTextField textField : requiredTextFields) {
             if (textField.getText().trim().isEmpty()) {
@@ -580,38 +606,25 @@ public class AddOpname extends javax.swing.JFrame {
 
         return id;
     }
-    //    private void insertToDB(Connection conn) throws SQLException {
-//        int selectedObatId = Integer.parseInt((String) Objects.requireNonNull(idObatComboBox.getSelectedItem()));
-//
-//        String queryAddBase = "INSERT INTO stok_opname (id_obat, tipe_transaksi, no_nota, username, tanggal, jumlah_barang,";
-//
-//        String queryAddExtra = "";
-//
-//        switch (Objects.requireNonNull(selectedTipeTransaksi)) {
-//            case "pembelian":
-//                queryAddExtra = " total_harga_beli, created_at)" + "VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
-//                break;
-//            case "penjualan":
-//                queryAddExtra = " total_harga_jual, created_at)" + "VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
-//                break;
-//        }
-//
-//        String finalQuery = queryAddBase + queryAddExtra;
-//
-//        PreparedStatement psAdd = conn.prepareStatement(finalQuery);
-//
-//        psAdd.setInt(1, selectedObatId);
-//        psAdd.setString(2, selectedTipeTransaksi);
-//        psAdd.setString(3, noNotaTextField.getText());
-//        psAdd.setString(4, selectedUsername);
-//        psAdd.setString(5, tanggalTransaksiTextField.getText());
-//        psAdd.setInt(6, Integer.parseInt(jumlahObatTextField.getText()));
-//        psAdd.setInt(7, Integer.parseInt(hargaTextField.getText()));
-//
-//        psAdd.executeUpdate();
-//
-//        psAdd.close();
-//    }
+        private void insertToDB(Connection conn) throws SQLException {
+        int selectedObatId = Integer.parseInt((String) Objects.requireNonNull(idObatComboBox.getSelectedItem()));
+
+        String queryAdd = "INSERT INTO stok_opname (id_obat, tempat_simpan, tanggal_catat, stok_masuk, stok_keluar, sisa_stock, keterangan, created_at)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
+            PreparedStatement psAdd = conn.prepareStatement(queryAdd);
+
+        psAdd.setInt(1, selectedObatId);
+        psAdd.setString(2, tempatSimpanField.getText());
+        psAdd.setString(3, tanggalField.getText());
+        psAdd.setInt(4, Integer.parseInt(stockMasukField.getText()));
+        psAdd.setInt(5, Integer.parseInt(stockKeluarField.getText()));
+        psAdd.setInt(6, Integer.parseInt(stockSisaField.getText()));
+        psAdd.setString(7, keteranganField.getText());
+
+        psAdd.executeUpdate();
+
+        psAdd.close();
+    }
     private void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Gagal", JOptionPane.ERROR_MESSAGE);
     }
