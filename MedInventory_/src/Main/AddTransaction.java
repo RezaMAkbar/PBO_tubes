@@ -648,7 +648,28 @@ public class AddTransaction extends javax.swing.JFrame {
 
         psAdd.executeUpdate();
 
+        updateStock(conn, selectedObatId, Integer.parseInt(jumlahObatTextField.getText()), selectedTipeTransaksi);
+
         psAdd.close();
+    }
+
+    private void updateStock(Connection conn, int obatId, int jumlah, String tipeTransaksi) throws SQLException {
+        String updateStockQuery;
+
+        if ("penjualan".equals(tipeTransaksi)) {
+            updateStockQuery = "UPDATE obat SET stock = stock - ? WHERE id = ?";
+        } else if ("pembelian".equals(tipeTransaksi)) {
+            updateStockQuery = "UPDATE obat SET stock = stock + ? WHERE id = ?";
+        } else {
+            throw new IllegalArgumentException("Invalid Type: " + tipeTransaksi);
+        }
+
+        try (PreparedStatement psUpdateStock = conn.prepareStatement(updateStockQuery)) {
+            psUpdateStock.setInt(1, jumlah);
+            psUpdateStock.setInt(2, obatId);
+
+            psUpdateStock.executeUpdate();
+        }
     }
     private void showErrorMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Gagal", JOptionPane.ERROR_MESSAGE);
