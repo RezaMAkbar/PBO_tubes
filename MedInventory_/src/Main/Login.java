@@ -219,18 +219,18 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_RegisterActionPerformed
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_LoginActionPerformed
-        String username = usernameTextField.getText();
+        loggedInUser = usernameTextField.getText();
         String password = new String(jPasswordField1.getPassword());
 
         // Check if the username and password are not empty
-        if (username.isEmpty() || password.isEmpty()) {
+        if (loggedInUser.isEmpty() || password.isEmpty()) {
             // Display an error message or take appropriate action
             JOptionPane.showMessageDialog(this, "Username and password cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
             return; // Exit the method without proceeding to the next step
         }
 
         // true if the credentials are correct
-        if (checkCredentials(username, password)) {
+        if (checkCredentials(loggedInUser, password)) {
 //            // If credentials are correct, create an instance of the Main class but since it's currently on testing phase, the class that is shown is regitester
             TableObat rg = new TableObat();
             rg.setVisible(true);
@@ -242,9 +242,8 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
         }
         //login logic
-
-
     }//GEN-LAST:event_LoginActionPerformed
+
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
@@ -253,6 +252,9 @@ public class Login extends javax.swing.JFrame {
     private void usernameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameTextFieldActionPerformed
+    public static String getLoggedInUser() {
+        return loggedInUser;
+    }
 
 
     private boolean checkCredentials(String username, String password) {
@@ -346,5 +348,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField usernameTextField;
+    private static String loggedInUser;
     // End of variables declaration//GEN-END:variables
 }
