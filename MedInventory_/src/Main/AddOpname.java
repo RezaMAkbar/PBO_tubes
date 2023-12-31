@@ -50,7 +50,7 @@ public class AddOpname extends javax.swing.JFrame {
         addOpnameButton = new javax.swing.JButton();
         addObatButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        namaObatField = new javax.swing.JTextField();
+        idObatField = new javax.swing.JTextField();
         tempatSimpanField = new javax.swing.JTextField();
         tanggalField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -67,7 +67,8 @@ public class AddOpname extends javax.swing.JFrame {
         stockSisaField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         stockKeluarField = new javax.swing.JTextField();
-        idObatComboBox = new javax.swing.JComboBox<>();
+        searchButton = new javax.swing.JButton();
+  //      idObatComboBox = new javax.swing.JComboBox<>();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -162,22 +163,22 @@ public class AddOpname extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-//        namaObatField.setText("Nama Obat");
-//        namaObatField.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                namaObatFieldActionPerformed(evt);
-//            }
-//        });
-        try {
-            List<String> medicineIDs = fetchIDs(connection());
-            idObatComboBox.removeAllItems(); // Clear existing items in the combo box
-
-            for (String medicineID : medicineIDs) {
-                idObatComboBox.addItem(medicineID);
+        idObatField.setText("ID Obat");
+        idObatField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idObatFieldActionPerformed(evt);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        });
+//        try {
+//            List<String> medicineIDs = fetchIDs(connection());
+//            idObatComboBox.removeAllItems(); // Clear existing items in the combo box
+//
+//            for (String medicineID : medicineIDs) {
+//                idObatComboBox.addItem(medicineID);
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
         tempatSimpanField.setText("Tempat Simpan");
         tempatSimpanField.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +196,7 @@ public class AddOpname extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(19, 118, 248));
-        jLabel1.setText("Nama Obat");
+        jLabel1.setText("ID Obat");
 
         jLabel2.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(19, 118, 248));
@@ -204,6 +205,14 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(19, 118, 248));
         jLabel3.setText("Tanggal");
+
+        searchButton.setBackground(new java.awt.Color(19, 118, 248));
+        searchButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/ic_sharp-search.png")))); // NOI18N
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(19, 118, 248));
@@ -298,7 +307,8 @@ public class AddOpname extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(idObatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(idObatField, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel10)
@@ -335,8 +345,9 @@ public class AddOpname extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idObatComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                   .addComponent(idObatField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                   .addComponent(jLabel1))
+                   .addComponent(searchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tempatSimpanField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -364,8 +375,7 @@ public class AddOpname extends javax.swing.JFrame {
                     .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
-        );
+                .addContainerGap(92, Short.MAX_VALUE)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -405,7 +415,18 @@ public class AddOpname extends javax.swing.JFrame {
     }//GEN-LAST:event_addTransactionButtonActionPerformed
 
     private void addOpnameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOpnameButtonActionPerformed
-        // TODO add your handling code here:
+        int selectedId = PopUpInputIDObat.getSelectedId();
+        setIdObat(selectedId);
+
+        String id = getIdObat();
+        //   System.out.println(id);
+        idObatField.setText(id);
+        String loggedInUser = Login.getLoggedInUser();
+
+        // Check if loggedInUser is empty then set it to "empty"
+        if (loggedInUser == null || loggedInUser.trim().isEmpty()) {
+            loggedInUser = "empty";
+        }
     }//GEN-LAST:event_addOpnameButtonActionPerformed
 
     private void addObatButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,7 +447,7 @@ public class AddOpname extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tanggalFieldActionPerformed
 
-    private void namaObatFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNotaFieldActionPerformed
+    private void idObatFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNotaFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_noNotaFieldActionPerformed
 
@@ -475,6 +496,21 @@ public class AddOpname extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+    public void setIdObat(int selectedId) {
+        idObat = String.valueOf(selectedId);
+        // System.out.println("setIdObat: " + idObat);
+
+    }
+
+    public String getIdObat() {
+        return idObat;
+    }
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        PopUpInputIDObat popUpInputIDObat = new PopUpInputIDObat();
+        AddTransaction instance = PopUpInputIDObat.addTransactionInstance;
+        popUpInputIDObat.setAddTransactionInstance(instance);
+        popUpInputIDObat.setVisible(true);
+    }//GEN-LAST:event_addOpnameButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -547,7 +583,7 @@ public class AddOpname extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField namaObatField;
+    private javax.swing.JTextField idObatField;
     private javax.swing.JTextField stockKeluarField;
     private javax.swing.JTextField stockSisaField;
     private javax.swing.JTextField stockMasukField;
@@ -555,7 +591,9 @@ public class AddOpname extends javax.swing.JFrame {
     private javax.swing.JTextField tanggalField;
     private javax.swing.JTextField totalHargaField;
     private javax.swing.JTextField keteranganField;
-    private javax.swing.JComboBox<String> idObatComboBox;
+    private javax.swing.JButton searchButton;
+    private String idObat;
+  //  private javax.swing.JComboBox<String> idObatComboBox;
     // End of variables declaration//GEN-END:variables
 
     private void clearTextFields(Container container) {
@@ -570,7 +608,7 @@ public class AddOpname extends javax.swing.JFrame {
     }
     private boolean isAnyTextFieldEmpty() {
         JTextField[] requiredTextFields = {tanggalField, tempatSimpanField, keteranganField, stockMasukField,
-                stockKeluarField, stockSisaField};
+                stockKeluarField, stockSisaField, idObatField};
 
         for (JTextField textField : requiredTextFields) {
             if (textField.getText().trim().isEmpty()) {
@@ -607,13 +645,13 @@ public class AddOpname extends javax.swing.JFrame {
         return id;
     }
         private void insertToDB(Connection conn) throws SQLException {
-        int selectedObatId = Integer.parseInt((String) Objects.requireNonNull(idObatComboBox.getSelectedItem()));
+      //  int selectedObatId = Integer.parseInt((String) Objects.requireNonNull(idObatComboBox.getSelectedItem()));
 
         String queryAdd = "INSERT INTO stok_opname (id_obat, tempat_simpan, tanggal_catat, stok_masuk, stok_keluar, sisa_stock, keterangan, created_at)" +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
             PreparedStatement psAdd = conn.prepareStatement(queryAdd);
 
-        psAdd.setInt(1, selectedObatId);
+        psAdd.setInt(1, Integer.parseInt(idObatField.getText()));
         psAdd.setString(2, tempatSimpanField.getText());
         psAdd.setString(3, tanggalField.getText());
         psAdd.setInt(4, Integer.parseInt(stockMasukField.getText()));
