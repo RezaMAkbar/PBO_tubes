@@ -370,6 +370,11 @@ public class AddObat extends javax.swing.JFrame {
                 return;
             }
 
+            if (isIntegerField()) {
+                showErrorMessage("Field yang memerlukan angka harus berupa angka/integer");
+                return;
+            }
+
             try (Connection conn = connection()) {
                 insertToDB(conn);
                 showSuccessfulMessage("Data berhasil dimasukan");
@@ -484,6 +489,25 @@ public class AddObat extends javax.swing.JFrame {
         }
         return false; // if all not empty
     }
+
+    private boolean isIntegerField() {
+        JTextField[] requiredIntegerFields = {stockTextField, hargaTextField};
+
+        for (JTextField textField : requiredIntegerFields) {
+            String fieldValue = textField.getText().trim();
+            if (fieldValue.isEmpty()) {
+                continue; //Skip empty field
+            }
+
+            try {
+                Integer.parseInt(fieldValue);
+            } catch (NumberFormatException e) {
+                return true; // if one field is not an int
+            }
+        }
+        return false; // if all requiered fields is int
+    }
+
 
     private void insertToDB(Connection conn) throws SQLException {
         String queryAdd = "INSERT INTO obat (nama_obat, stock, harga, tanggal_masuk, expired, no_batch, created_at)" +

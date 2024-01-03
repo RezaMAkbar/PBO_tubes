@@ -495,6 +495,11 @@ public class AddTransaction extends javax.swing.JFrame {
                 return;
             }
 
+            if (isIntegerField()) {
+                showErrorMessage("Field yang memerlukan angka harus berupa angka/integer");
+                return;
+            }
+
             try (Connection conn = connection()) {
                 insertToDB(conn);
                 showSuccessfulMessage("Data berhasil dimasukan");
@@ -602,6 +607,24 @@ public class AddTransaction extends javax.swing.JFrame {
             }
         }
         return false; // if all not empty
+    }
+
+    private boolean isIntegerField() {
+        JTextField[] requiredIntegerFields = {jumlahObatTextField, hargaTextField, idObatField};
+
+        for (JTextField textField : requiredIntegerFields) {
+            String fieldValue = textField.getText().trim();
+            if (fieldValue.isEmpty()) {
+                continue; //Skip empty field
+            }
+
+            try {
+                Integer.parseInt(fieldValue);
+            } catch (NumberFormatException e) {
+                return true; // if one field is not an int
+            }
+        }
+        return false; // if all requiered fields is int
     }
 
     private Connection connection() throws SQLException {

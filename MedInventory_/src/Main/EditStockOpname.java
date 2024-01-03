@@ -97,11 +97,10 @@ public class EditStockOpname extends JFrame {
                     psUpdate.executeUpdate();
                     psUpdate.close();
 
-                    // Close the frame after updating
-                    dispose();
+                    JOptionPane.showMessageDialog(null, "Data berhasil di update! silahkan refresh", "Success", JOptionPane.INFORMATION_MESSAGE);
                 } catch (NumberFormatException | SQLException ex) {
                     ex.printStackTrace();
-                    // Handle the exception as needed
+                    // Handle exception as needed
                     JOptionPane.showMessageDialog(null, "Error updating data: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
