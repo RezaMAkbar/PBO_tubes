@@ -298,7 +298,7 @@ public class PopUpInputIDObat extends javax.swing.JFrame {
         // Create new Frame to display the matching med name
         JFrame namaObatFrame = new JFrame("Matching Obat");
         namaObatFrame.setSize(400, 300);
-        namaObatFrame.dispose();
+      //  namaObatFrame.dispose();
 
         idObatList = matchMedicineNameWithID(namaObat);
         idObatList.sort(Comparator.comparingInt(id -> Integer.parseInt(id.split("\\(")[1].replace(")", ""))));
@@ -381,7 +381,7 @@ public class PopUpInputIDObat extends javax.swing.JFrame {
             });
 
             namaObatFrame.setLocationRelativeTo(this);
-            namaObatFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+     //       namaObatFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             namaObatFrame.setVisible(true);
         }
     }

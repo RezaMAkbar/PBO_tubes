@@ -74,54 +74,46 @@ public class EditTransaksi extends JFrame {
         add(panel);
 
         fetchDataFromDatabase(id);
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    String queryUpdate = "UPDATE transaksi SET no_nota = ?, tanggal = ?, jumlah_barang = ?, " +
-                            "catatan = ?, updated_at = NOW() WHERE id = ?";
+        editButton.addActionListener(e -> {
+            try {
+                String queryUpdate = "UPDATE transaksi SET no_nota = ?, tanggal = ?, jumlah_barang = ?, " +
+                        "catatan = ?, updated_at = NOW() WHERE id = ?";
 
-                    String tipeTransaksi = fetchTransactionType(id);
+                String tipeTransaksi = fetchTransactionType(id);
 
-                    if ("pembelian".equals(tipeTransaksi)) {
-                        queryUpdate = "UPDATE transaksi SET no_nota = ?, tanggal = ?, jumlah_barang = ?, " +
-                                "catatan = ?, total_harga_beli = ?, updated_at = NOW() WHERE id = ?";
-                    } else if ("penjualan".equals(tipeTransaksi)) {
-                        queryUpdate = "UPDATE transaksi SET no_nota = ?, tanggal = ?, jumlah_barang = ?, " +
-                                "catatan = ?, total_harga_jual = ?, updated_at = NOW() WHERE id = ?";
-                    }
-
-                    PreparedStatement psUpdate = conn.prepareStatement(queryUpdate);
-
-                    psUpdate.setString(1, notaField.getText());
-                    psUpdate.setString(2, tanggalField.getText());
-                    psUpdate.setInt(3, Integer.parseInt(jumlahBarangField.getText()));
-                    psUpdate.setString(4, catatanField.getText());
-
-                    if ("pembelian".equals(tipeTransaksi)) {
-                        psUpdate.setInt(5, Integer.parseInt(hargaField.getText()));
-                    } else if ("penjualan".equals(tipeTransaksi)) {
-                        psUpdate.setInt(5, Integer.parseInt(jumlahBarangField.getText()));
-                    }
-                    psUpdate.setInt(6, id);
-
-                    psUpdate.executeUpdate();
-                    psUpdate.close();
-
-                    dispose();
-                } catch (NumberFormatException | SQLException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Error updating data: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                if ("restock".equals(tipeTransaksi)) {
+                    queryUpdate = "UPDATE transaksi SET no_nota = ?, tanggal = ?, jumlah_barang = ?, " +
+                            "catatan = ?, total_harga_beli = ?, updated_at = NOW() WHERE id = ?";
+                } else if ("penjualan".equals(tipeTransaksi)) {
+                    queryUpdate = "UPDATE transaksi SET no_nota = ?, tanggal = ?, jumlah_barang = ?, " +
+                            "catatan = ?, total_harga_jual = ?, updated_at = NOW() WHERE id = ?";
                 }
+
+                PreparedStatement psUpdate = conn.prepareStatement(queryUpdate);
+
+                psUpdate.setString(1, notaField.getText());
+                psUpdate.setString(2, tanggalField.getText());
+                psUpdate.setInt(3, Integer.parseInt(jumlahBarangField.getText()));
+                psUpdate.setString(4, catatanField.getText());
+
+                if ("restock".equals(tipeTransaksi)) {
+                    psUpdate.setInt(5, Integer.parseInt(hargaField.getText()));
+                } else if ("penjualan".equals(tipeTransaksi)) {
+                    psUpdate.setInt(5, Integer.parseInt(jumlahBarangField.getText()));
+                }
+                psUpdate.setInt(6, id);
+
+                psUpdate.executeUpdate();
+                psUpdate.close();
+
+                JOptionPane.showMessageDialog(null, "Data berhasil di update! silahkan refresh", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (NumberFormatException | SQLException ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error updating data: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        cancelButton.addActionListener(e -> dispose());
 
         setVisible(true);
     }
@@ -150,7 +142,7 @@ public class EditTransaksi extends JFrame {
 
                         String tipeTransaksi = rs.getString("tipe_transaksi");
                         
-                        if ("pembelian".equals(tipeTransaksi)) {
+                        if ("restock".equals(tipeTransaksi)) {
                             hargaField.setText(String.valueOf(rs.getInt("total_harga_beli")));
                         } else if ("penjualan".equals(tipeTransaksi)) {
                             hargaField.setText(String.valueOf(rs.getInt("total_harga_jual")));

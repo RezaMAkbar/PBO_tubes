@@ -41,33 +41,33 @@ public class AddOpname extends javax.swing.JFrame {
         jFrame1 = new javax.swing.JFrame();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
+        totalHargaField = new javax.swing.JTextField();
+        stockKeluarField = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        tambahTransaksiButton = new javax.swing.JButton();
+        tambahOpnameButton = new javax.swing.JButton();
+        addObatButton = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        idObatField = new javax.swing.JTextField();
+        tempatSimpanField = new javax.swing.JTextField();
+        tanggalField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jTextField8 = new javax.swing.JTextField();
+        emptyInputButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        keteranganField = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        stockMasukField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
+        stockSisaField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
+        stockKeluarField = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -84,12 +84,12 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(19, 118, 248));
         jLabel7.setText("Total Harga");
 
-        jTextField6.setText("Total Harga");
+        totalHargaField.setText("Total Harga");
 
-        jTextField11.setText("Keluar");
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        stockKeluarField.setText("Keluar");
+        stockKeluarField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                stockKeluarFieldActionPerformed(evt);
             }
         });
 
@@ -101,38 +101,38 @@ public class AddOpname extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(19, 118, 248));
 
-        jButton1.setBackground(new java.awt.Color(19, 118, 248));
-        jButton1.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/transactionWhite.png"))); // NOI18N
-        jButton1.setText("Tambah Transaction");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        tambahTransaksiButton.setBackground(new java.awt.Color(19, 118, 248));
+        tambahTransaksiButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
+        tambahTransaksiButton.setForeground(new java.awt.Color(255, 255, 255));
+        tambahTransaksiButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/transactionWhite.png")))); // NOI18N
+        tambahTransaksiButton.setText("Tambah Transaction");
+        tambahTransaksiButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        tambahTransaksiButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                tambahTransaksiButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(19, 118, 248));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/infuse.png"))); // NOI18N
-        jButton4.setText("Tambah Opname");
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 3, true));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        tambahOpnameButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
+        tambahOpnameButton.setForeground(new java.awt.Color(19, 118, 248));
+        tambahOpnameButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/infuse.png"))); // NOI18N
+        tambahOpnameButton.setText("Ambil Nama Obat");
+        tambahOpnameButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 3, true));
+        tambahOpnameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                tambahOpnameButtonActionPerformed(evt);
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(19, 118, 248));
-        jButton5.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/obatWhite.png"))); // NOI18N
-        jButton5.setText("Tambah Obat");
-        jButton5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        addObatButton.setBackground(new java.awt.Color(19, 118, 248));
+        addObatButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
+        addObatButton.setForeground(new java.awt.Color(255, 255, 255));
+        addObatButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/obatWhite.png"))); // NOI18N
+        addObatButton.setText("Tambah Obat");
+        addObatButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
+        addObatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                addObatButtonActionPerformed(evt);
             }
         });
 
@@ -142,11 +142,11 @@ public class AddOpname extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addObatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tambahTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tambahOpnameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -154,32 +154,32 @@ public class AddOpname extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tambahTransaksiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tambahOpnameButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addObatButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField1.setText("ID Obat");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        idObatField.setText("ID Obat");
+        idObatField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                idObatFieldActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("Tempat Simpan");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        tempatSimpanField.setText("Tempat Simpan");
+        tempatSimpanField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                tempatSimpanFieldActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("Tanggal");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        tanggalField.setText("Tanggal");
+        tanggalField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                tanggalFieldActionPerformed(evt);
             }
         });
 
@@ -201,30 +201,41 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/infuse.png"))); // NOI18N
         jLabel6.setText("Tambah Opname");
 
-        jButton2.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(19, 118, 248));
-        jButton2.setText("Kosongkan Input");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 2, true));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        emptyInputButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        emptyInputButton.setForeground(new java.awt.Color(19, 118, 248));
+        emptyInputButton.setText("Kosongkan Input");
+        emptyInputButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 2, true));
+        emptyInputButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                emptyInputButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(19, 118, 248));
-        jButton3.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Batal");
-
-        jButton6.setBackground(new java.awt.Color(19, 118, 248));
-        jButton6.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 18)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("Simpan");
-
-        jTextField8.setText("Keterangan");
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setBackground(new java.awt.Color(19, 118, 248));
+        cancelButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
+        cancelButton.setForeground(new java.awt.Color(255, 255, 255));
+        cancelButton.setText("Batal");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        saveButton.setBackground(new java.awt.Color(19, 118, 248));
+        saveButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 18)); // NOI18N
+        saveButton.setForeground(new java.awt.Color(255, 255, 255));
+        saveButton.setText("Simpan");  
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        
+
+        keteranganField.setText("Keterangan");
+        keteranganField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                keteranganFieldActionPerformed(evt);
             }
         });
 
@@ -232,10 +243,10 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(19, 118, 248));
         jLabel9.setText("Keterangan");
 
-        jTextField9.setText("Masuk");
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        stockMasukField.setText("Masuk");
+        stockMasukField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                stockMasukFieldActionPerformed(evt);
             }
         });
 
@@ -243,10 +254,10 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel10.setForeground(new java.awt.Color(19, 118, 248));
         jLabel10.setText("Masuk & Keluar");
 
-        jTextField12.setText("Sisa");
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        stockSisaField.setText("Sisa");
+        stockSisaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                stockSisaFieldActionPerformed(evt);
             }
         });
 
@@ -254,18 +265,18 @@ public class AddOpname extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(19, 118, 248));
         jLabel13.setText("Sisa");
 
-        jTextField13.setText("Keluar");
-        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+        stockKeluarField.setText("Keluar");
+        stockKeluarField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField13ActionPerformed(evt);
+                stockKeluarFieldActionPerformed(evt);
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(19, 118, 248));
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/ic_sharp-search.png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(19, 118, 248));
+        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/ic_sharp-search.png"))); // NOI18N
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -286,7 +297,7 @@ public class AddOpname extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(idObatField, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel10)
@@ -294,15 +305,15 @@ public class AddOpname extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(stockMasukField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField12)
+                                        .addComponent(stockKeluarField, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(stockSisaField)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                        .addComponent(emptyInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,11 +321,11 @@ public class AddOpname extends javax.swing.JFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                            .addComponent(jTextField8)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(tempatSimpanField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                            .addComponent(keteranganField)
+                            .addComponent(tanggalField, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(123, 123, 123))
         );
         jPanel3Layout.setVerticalGroup(
@@ -324,36 +335,36 @@ public class AddOpname extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idObatField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tempatSimpanField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tanggalField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(keteranganField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockMasukField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockKeluarField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(stockSisaField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emptyInputButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
@@ -394,7 +405,7 @@ public class AddOpname extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_addTransactionButtonActionPerformed
 
-    private void addOpnameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOpnameButtonActionPerformed
+    private void tambahOpnameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addOpnameButtonActionPerformed
         int selectedId = PopUpInputIDObat.getSelectedId();
         setIdObat(selectedId);
 
@@ -462,13 +473,21 @@ public class AddOpname extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_addObatButtonActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        PopUpInputIDObat popUpInputIDObat = new PopUpInputIDObat();
+        AddTransaction instance = PopUpInputIDObat.addTransactionInstance;
+        popUpInputIDObat.setAddTransactionInstance(instance);
+        popUpInputIDObat.setVisible(true);
+    }//GEN-LAST:event_searchButtonActionPerformed
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         try {
             if (isAnyTextFieldEmpty()) {
                 showErrorMessage("Mohon isi semua field");
+                return;
+            }
+
+            if (isIntegerField()) {
+                showErrorMessage("Field yang memerlukan angka harus berupa angka/integer");
                 return;
             }
 
@@ -489,12 +508,12 @@ public class AddOpname extends javax.swing.JFrame {
     public String getIdObat() {
         return idObat;
     }
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        PopUpInputIDObat popUpInputIDObat = new PopUpInputIDObat();
-        AddTransaction instance = PopUpInputIDObat.addTransactionInstance;
-        popUpInputIDObat.setAddTransactionInstance(instance);
-        popUpInputIDObat.setVisible(true);
-    }                                               
+//    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+//        PopUpInputIDObat popUpInputIDObat = new PopUpInputIDObat();
+//        AddTransaction instance = PopUpInputIDObat.addTransactionInstance;
+//        popUpInputIDObat.setAddTransactionInstance(instance);
+//        popUpInputIDObat.setVisible(true);
+//    }                                               
 
     /**
      * @param args the command line arguments
@@ -547,13 +566,13 @@ public class AddOpname extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton tambahTransaksiButton;
+    private javax.swing.JButton emptyInputButton;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton tambahOpnameButton;
+    private javax.swing.JButton addObatButton;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JButton searchButton;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -568,15 +587,16 @@ public class AddOpname extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField idObatField;
+    private javax.swing.JTextField stockKeluarField;
+    private javax.swing.JTextField stockSisaField;
+   // private javax.swing.JTextField stockKeluarField;
+    private javax.swing.JTextField tempatSimpanField;
+    private javax.swing.JTextField tanggalField;
+    private javax.swing.JTextField totalHargaField;
+    private javax.swing.JTextField keteranganField;
+    private javax.swing.JTextField stockMasukField;
+    private String idObat;
     // End of variables declaration//GEN-END:variables
 
     private void clearTextFields(Container container) {
@@ -600,6 +620,25 @@ public class AddOpname extends javax.swing.JFrame {
         }
         return false; // if all not empty
     }
+
+    private boolean isIntegerField() {
+        JTextField[] requiredIntegerFields = {stockMasukField, stockKeluarField, stockSisaField, idObatField};
+
+        for (JTextField textField : requiredIntegerFields) {
+            String fieldValue = textField.getText().trim();
+            if (fieldValue.isEmpty()) {
+                continue; //Skip empty field
+            }
+
+            try {
+                Integer.parseInt(fieldValue);
+            } catch (NumberFormatException e) {
+                return true; // if one field is not an int
+            }
+        }
+        return false; // if all requiered fields is int
+    }
+
     private Connection connection() throws SQLException {
         MysqlDataSource dataSource = new MysqlDataSource();
         String DB_URL = "jdbc:mysql://localhost:3306/tubes_pbo?serverTimezone=Asia/Jakarta";
