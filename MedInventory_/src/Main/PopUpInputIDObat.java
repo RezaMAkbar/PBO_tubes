@@ -278,9 +278,13 @@ public class PopUpInputIDObat extends javax.swing.JFrame {
     }
 
     private void searchButtonActionPerformed(ActionEvent evt) {
-        String namaObat = namaObatTextField.getText().trim();
-        if (!namaObat.isEmpty()) {
-            showMatchingObat(namaObat);
+        String keyword = namaObatTextField.getText().trim();
+        if (!keyword.isEmpty()) {
+            if (isNumeric(keyword)) {
+                int keywordInt = Integer.parseInt(keyword);
+                showMatchingObat(keywordInt);
+            }
+            showMatchingObat(keyword);
         } else {
             JOptionPane.showMessageDialog(this, "Nama obat tidak ditemukan atau tidak valid.");
         }
@@ -380,11 +384,132 @@ public class PopUpInputIDObat extends javax.swing.JFrame {
                 }
             });
 
-            namaObatFrame.setLocationRelativeTo(this);
+            // Calculate the location to the left of the main frame
+            int mainFrameX = getLocation().x;
+            int mainFrameY = getLocation().y;
+            int frameWidth = getWidth();
+            int frameHeight = getHeight();
+
+            int leftOfMainFrameX = mainFrameX + namaObatFrame.getWidth() + 130;
+            int leftOfMainFrameY = mainFrameY;
+
+            // Set location of the result frame to the left of the main frame
+            namaObatFrame.setLocation(leftOfMainFrameX, leftOfMainFrameY);
      //       namaObatFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             namaObatFrame.setVisible(true);
         }
     }
+    private void showMatchingObat(int idObat) {
+        // Create new Frame to display the matching med name
+        JFrame namaObatFrame = new JFrame("Matching Obat");
+        namaObatFrame.setSize(400, 300);
+        //  namaObatFrame.dispose();
+
+        idObatList = matchMedicineNameWithID(String.valueOf(idObat));
+        idObatList.sort(Comparator.comparingInt(id -> Integer.parseInt(id.split("\\(")[1].replace(")", ""))));
+
+        // Create a TextArea to display the matching medicine name
+        JTextArea matchingObatTextArea = new JTextArea();
+        matchingObatTextArea.setEditable(false);
+        boolean found = false;
+
+        try {
+            MysqlDataSource dataSource = new MysqlDataSource();
+            String DB_URL = "jdbc:mysql://localhost:3306/tubes_pbo?serverTimezone=Asia/Jakarta";
+            String DB_USERNAME = "root";
+            String DB_PASSWORD = "";
+
+            dataSource.setUrl(DB_URL);
+            dataSource.setUser(DB_USERNAME);
+            dataSource.setPassword(DB_PASSWORD);
+
+
+
+            try (Connection conn = dataSource.getConnection()) {
+                String querySelect = "SELECT id, nama_obat FROM obat WHERE id LIKE ?";
+                try (PreparedStatement psSelect = conn.prepareStatement(querySelect)) {
+                    psSelect.setString(1, "%" + idObat + "%");
+                    try (ResultSet rs = psSelect.executeQuery()) {
+                        while (rs.next()) {
+                            String nama_obat = rs.getString("nama_obat");
+                            int id = rs.getInt("id");
+                            matchingObatTextArea.append(nama_obat + " (" + id + ")\n");
+                            found = true;
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        if (!found) {
+            JOptionPane.showMessageDialog(this, "Nama Obat tidak ditemukan.", "Not Found", JOptionPane.INFORMATION_MESSAGE);
+            namaObatFrame.dispose();
+        } else {
+
+            // Add TextArea to Frame
+            JScrollPane scrollPane = new JScrollPane(matchingObatTextArea);
+            namaObatFrame.add(scrollPane);
+
+            // Add a mouse listener to the TextArea
+            matchingObatTextArea.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    int caretPosition = matchingObatTextArea.viewToModel(e.getPoint());
+                    try {
+                        int lineNumber = matchingObatTextArea.getLineOfOffset(caretPosition);
+                        int startOffset = matchingObatTextArea.getLineStartOffset(lineNumber);
+                        int endOffset = matchingObatTextArea.getLineEndOffset(lineNumber);
+
+                        // Get the clicked line text
+                        String clickedLine = matchingObatTextArea.getText().substring(startOffset, endOffset).trim();
+
+                        // Extract the ID from the clicked line text
+                        int idStartIndex = clickedLine.lastIndexOf("(") + 1;
+                        int idEndIndex = clickedLine.lastIndexOf(")");
+
+                        if (idEndIndex > idStartIndex) {
+                            String idString = clickedLine.substring(idStartIndex, idEndIndex);
+                            selectedId = Integer.parseInt(idString);
+                        }
+
+                        // Set the clicked line text to the namaObatTextField
+                        namaObatTextField.setText(clickedLine);
+                    } catch (BadLocationException | NumberFormatException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            });
+
+            // Calculate the location to the left of the main frame
+            int mainFrameX = getLocation().x;
+            int mainFrameY = getLocation().y;
+            int frameWidth = getWidth();
+            int frameHeight = getHeight();
+
+            int leftOfMainFrameX = mainFrameX - namaObatFrame.getWidth();
+            int leftOfMainFrameY = mainFrameY;
+
+            // Set location of the result frame to the left of the main frame
+            namaObatFrame.setLocation(leftOfMainFrameX, leftOfMainFrameY);
+            //       namaObatFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            namaObatFrame.setVisible(true);
+        }
+    }
+
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
     private ArrayList<String> matchMedicineNameWithID(String namaObat) {
         ArrayList<String> idObatList = new ArrayList<>();
         try {

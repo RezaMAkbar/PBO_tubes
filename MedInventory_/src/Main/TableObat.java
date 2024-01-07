@@ -266,29 +266,29 @@ public class TableObat extends javax.swing.JFrame {
         tableObat.setForeground(new java.awt.Color(19, 118, 248));
         tableObat.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null},
-                        {null, null, null, null, null, null, null}
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null},
+                        {null, null, null, null, null, null, null, null}
                 },
                 new String [] {
-                        "ID", "Nama Obat", "Tanggal Masuk", "Tanggal Kadaluarsa", "Jumlah Stock", "Harga", "Actions"
+                        "ID", "Nama Obat", "Tanggal Masuk", "Tanggal Kadaluarsa", "Jumlah Stock", "Harga", "Tempat Simpan", "Actions"
                 }
         ));
         try {
@@ -304,10 +304,10 @@ public class TableObat extends javax.swing.JFrame {
             }
         });
         // Set the cell renderer for the Actions column
-        tableObat.getColumnModel().getColumn(6).setCellRenderer(new ButtonRenderer());
+        tableObat.getColumnModel().getColumn(7).setCellRenderer(new ButtonRenderer());
 
         // Set the cell editor for the Actions column
-        tableObat.getColumnModel().getColumn(6).setCellEditor(new ButtonEditor());
+        tableObat.getColumnModel().getColumn(7).setCellEditor(new ButtonEditor());
 
         jScrollPane1.setViewportView(tableObat);
 
@@ -485,8 +485,10 @@ public class TableObat extends javax.swing.JFrame {
                         String expired = rs.getString("expired");
                         String tanggal_masuk = rs.getString("tanggal_masuk");
 
+                        String tempat_simpan = fetchTempatSimpan(conn, id);
+
                         // Add a new row to the table
-                        Object[] row = {id, nama_obat, tanggal_masuk, expired, stock, harga, "Edit Obat"};
+                        Object[] row = {id, nama_obat, tanggal_masuk, expired, stock, harga, tempat_simpan, "Edit Obat"};
                         tableModel.addRow(row);
                     }
                 }
@@ -495,6 +497,22 @@ public class TableObat extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
+
+    private static String fetchTempatSimpan(Connection conn, int id) throws SQLException {
+        String querySelectTempatSimpan = "SELECT tempat_simpan FROM stok_opname WHERE id_obat = ?";
+        try (PreparedStatement psSelectTempatSimpan = conn.prepareStatement(querySelectTempatSimpan)) {
+            psSelectTempatSimpan.setInt(1, id);
+
+            try (ResultSet rsTempatSimpan = psSelectTempatSimpan.executeQuery()) {
+                if (rsTempatSimpan.next()) {
+                    return rsTempatSimpan.getString("tempat_simpan");
+                } else {
+                    return "N/A"; // Return a default value if no matching record is found
+                }
+            }
+        }
+    }
+
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
             setOpaque(true);

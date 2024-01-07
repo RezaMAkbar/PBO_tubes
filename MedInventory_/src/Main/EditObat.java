@@ -17,6 +17,7 @@ public class EditObat extends JFrame {
     private JTextField stockField;
     private JTextField hargaField;
     private JTextField tanggalMasukField;
+    private JTextField tempatSimpanField;
 
 
     public EditObat(int id) throws SQLException {
@@ -37,7 +38,7 @@ public class EditObat extends JFrame {
         setLocationRelativeTo(null); // Center the frame on the screen
 
         // Create a panel with labels, text fields, and an "Edit" button
-        JPanel panel = new JPanel(new GridLayout(6, 2));
+        JPanel panel = new JPanel(new GridLayout(7, 2));
 
         // Add labels and text fields
         panel.add(new JLabel("Nama Obat:"));
@@ -60,6 +61,10 @@ public class EditObat extends JFrame {
         hargaField = new JTextField();
         panel.add(hargaField);
 
+        panel.add(new JLabel("Tempat Simpan:"));
+        tempatSimpanField = new JTextField();
+        panel.add(tempatSimpanField);
+
         // Add "Edit" button
         JButton editButton = new JButton("Edit");
         JButton cancelButton = new JButton("Cancel");
@@ -72,6 +77,7 @@ public class EditObat extends JFrame {
         add(panel);
 
         fetchDataFromDatabase(id);
+        fetchStorageFromDatabase(id);
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -89,6 +95,15 @@ public class EditObat extends JFrame {
 
                     psUpdate.executeUpdate();
                     psUpdate.close();
+
+                    String queryUpdate2 = "UPDATE stok_opname SET tempat_simpan = ?, WHERE id_obat = ?";
+                    PreparedStatement psUpdate2 = conn.prepareStatement(queryUpdate2);
+
+                    psUpdate2.setString(1, tempatSimpanField.getText());
+                    psUpdate2.setInt(2, id);
+
+                    psUpdate2.executeUpdate();
+                    psUpdate2.close();
 
                     JOptionPane.showMessageDialog(null, "Data berhasil di update! silahkan refresh", "Success", JOptionPane.INFORMATION_MESSAGE);
                 } catch (NumberFormatException | SQLException ex) {
@@ -132,6 +147,34 @@ public class EditObat extends JFrame {
                         stockField.setText(String.valueOf(rs.getInt("stock")));
                         hargaField.setText(String.valueOf(rs.getInt("harga")));
                         tanggalMasukField.setText(rs.getString("tanggal_masuk"));
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error fetching data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    private void fetchStorageFromDatabase(int idObat) {
+        try {
+            MysqlDataSource dataSource = new MysqlDataSource();
+            String DB_URL = "jdbc:mysql://localhost:3306/tubes_pbo?serverTimezone=Asia/Jakarta";
+            String DB_USERNAME = "root";
+            String DB_PASSWORD = "";
+
+            dataSource.setUrl(DB_URL);
+            dataSource.setUser(DB_USERNAME);
+            dataSource.setPassword(DB_PASSWORD);
+
+            Connection conn = dataSource.getConnection();
+
+            // Fetch data from db based with medicine ID
+            String querySelect = "SELECT tempat_simpan FROM stok_opname WHERE id_obat = ?";
+            try (PreparedStatement psSelect = conn.prepareStatement(querySelect)) {
+                psSelect.setInt(1, idObat);
+                try (ResultSet rs = psSelect.executeQuery()) {
+                    if (rs.next()) {
+                        tempatSimpanField.setText(rs.getString("tempat_simpan"));
                     }
                 }
             }

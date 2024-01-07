@@ -18,7 +18,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  *
@@ -98,7 +100,7 @@ public class TableStockOpname extends javax.swing.JFrame {
         deleteButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
         deleteButton.setForeground(new java.awt.Color(255, 255, 255));
         deleteButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/decrease.png")))); // NOI18N
-        deleteButton.setText("Hapus Stock Obat Opname");
+        deleteButton.setText("Hapus Stock Opname Obat");
         deleteButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,10 +112,10 @@ public class TableStockOpname extends javax.swing.JFrame {
             }
         });
 
-        addButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
+        addButton.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         addButton.setForeground(new java.awt.Color(19, 118, 248));
         addButton.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/increase.png")))); // NOI18N
-        addButton.setText("Tambah Stock Obat Opname");
+        addButton.setText("Tambah Stock Opname Untuk Obat");
         addButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 2, true));
         addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,7 +286,7 @@ public class TableStockOpname extends javax.swing.JFrame {
                         {null, null, null, null, null, null, null, null, null, null, null, null, null}
                 },
                 new String [] {
-                        "ID", "Nama Obat", "Harga", "Tanggal", "No Nota", "No Batch", "Tanggal Kadaluarsa", "Keterangan", "Masuk", "Keluar", "Sisa", "Tempat Simpan", "Actions"
+                        "ID", "Nama Obat", "ID Obat", "Harga Obat", "Actions"
                 }
         ));
         try {
@@ -300,7 +302,7 @@ public class TableStockOpname extends javax.swing.JFrame {
                 tableObatPropertyChange(evt);
             }
         });
-        tableObat.getColumnModel().getColumn(12).setCellRenderer(new ButtonRenderer());
+        tableObat.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
 
     //    tableObat.getColumnModel().getColumn(11).setCellEditor(new ButtonEditor());
         jScrollPane1.setViewportView(tableObat);
@@ -457,6 +459,9 @@ public class TableStockOpname extends javax.swing.JFrame {
         dataSource.setUser(DB_USERNAME);
         dataSource.setPassword(DB_PASSWORD);
 
+        // Use a set to keep track of unique id_obat values
+        Set<Integer> uniqueIdObats = new HashSet<>();
+
         try (Connection conn = dataSource.getConnection()) {
             String querySelect = "SELECT so.*, o.nama_obat, o.no_batch, o.expired, o.harga " +
                     "FROM stok_opname so " +
@@ -468,25 +473,21 @@ public class TableStockOpname extends javax.swing.JFrame {
 
                     while (rs.next()) {
                         int id = rs.getInt("id");
-                        String tempatSimpan = rs.getString("tempat_simpan");
-                        String id_obat = rs.getString("id_obat");
-                        String nama_obat = rs.getString("nama_obat");
-                        String tanggalCatat = rs.getString("tanggal_catat");
-                        int sisaStock = rs.getInt("sisa_stock");
-                        String keterangan = rs.getString("keterangan");
-                        int stokKeluar = rs.getInt("stok_keluar");
-                        int stokKMasuk = rs.getInt("stok_masuk");
-                        int harga = rs.getInt("harga");
-                        String noNota = fetchMedNote(id_obat);
-                        String noBatch = rs.getString("no_batch");
-                        String expired = rs.getString("expired");
+                        int id_obat = rs.getInt("id_obat");
+                        // Check if id_obat is already present in the set
+                        if (!uniqueIdObats.contains(id_obat)) {
+                            String nama_obat = rs.getString("nama_obat");
+                            int harga = rs.getInt("harga");
 
-                        Object[] row = {id, nama_obat, harga, tanggalCatat, noNota, noBatch, expired, keterangan, stokKMasuk,
-                                stokKeluar, sisaStock, tempatSimpan, "Edit Data"};
-                        tableModel.addRow(row);
-                        ButtonEditor buttonEditor = new ButtonEditor();
-                        buttonEditor.setId(id);
-                        tableObat.getColumnModel().getColumn(12).setCellEditor(buttonEditor);
+                            Object[] row = {id, nama_obat, id_obat, harga, "Lihat Spesifik"};
+                            tableModel.addRow(row);
+                            ButtonEditor buttonEditor = new ButtonEditor();
+                            buttonEditor.setId(id);
+                            tableObat.getColumnModel().getColumn(4).setCellEditor(buttonEditor);
+
+                            // Add id_obat to the set
+                            uniqueIdObats.add(id_obat);
+                        }
                     }
                 }
             }
@@ -524,7 +525,7 @@ public class TableStockOpname extends javax.swing.JFrame {
     class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
             setOpaque(true);
-            setText("Edit Data");
+            setText("Lihat Spesifik");
         }
 
         @Override
@@ -540,7 +541,7 @@ public class TableStockOpname extends javax.swing.JFrame {
         private int id;
 
         public ButtonEditor() {
-            button = new JButton("Edit Data");
+            button = new JButton("Lihat Spesifik");
             button.setOpaque(true);
             button.addActionListener(this);
         }
@@ -556,7 +557,7 @@ public class TableStockOpname extends javax.swing.JFrame {
 
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            clickedValue = (value != null) ? value.toString() : "Edit Data";
+            clickedValue = (value != null) ? value.toString() : "Lihat Spesifik";
             clickedRow = row;
 
             button.setText(clickedValue);
@@ -566,16 +567,12 @@ public class TableStockOpname extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             // Retrieve the ID from the clicked row
-            int id = (int) tableObat.getValueAt(clickedRow, 0);
+            int id = (int) tableObat.getValueAt(clickedRow, 2);
 
             // Open test frame and pass the ID
-            try {
-                EditStockOpname editFrame = new EditStockOpname(id);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-
-
+            TableStockOpnameDetailed tableStockOpnameDetailed = new TableStockOpnameDetailed(id);
+            tableStockOpnameDetailed.setVisible(true);
+            // Show or set up the frame as needed
             fireEditingStopped();
         }
     }
