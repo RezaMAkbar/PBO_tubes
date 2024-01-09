@@ -8,6 +8,8 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -105,6 +107,16 @@ public class Login extends javax.swing.JFrame {
         jPasswordField1.setText("password");
         jPasswordField1.setAutoscrolls(false);
         jPasswordField1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(19, 118, 248), 2, true));
+        jPasswordField1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    LoginActionPerformed(e);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         login.setBackground(new java.awt.Color(19, 118, 248));
         login.setForeground(new java.awt.Color(255, 255, 255));

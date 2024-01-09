@@ -12,6 +12,9 @@ import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -105,7 +108,7 @@ public class AddObat extends JFrame {
         addObatButton.setFont(new Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         addObatButton.setForeground(new Color(19, 118, 248));
         addObatButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/medic.png")))); // NOI18N
-        addObatButton.setText("Tambah Obat");
+        addObatButton.setText("Ambil Tanggal Sekarang");
         addObatButton.setBorder(new javax.swing.border.LineBorder(new Color(19, 118, 248), 1, true));
         addObatButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,7 +122,7 @@ public class AddObat extends JFrame {
                 jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(addObatButton, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(addObatButton, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(addTransactionButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -351,12 +354,12 @@ public class AddObat extends JFrame {
     }//GEN-LAST:event_addStockOpnameButtonActionPerformed
 
     private void addObatButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addObatButtonActionPerformed
-        try (Connection conn = connection()) {
-            insertToDB(conn);
-            System.out.println("Data berhasil dimasukan!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Timestamp currentTimestamp = new Timestamp(new Date().getTime());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(currentTimestamp);
+
+        tanggalMasukTextField.setText(formattedDate);
     }//GEN-LAST:event_addObatButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addObatButtonActionPerformed
