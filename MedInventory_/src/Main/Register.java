@@ -11,6 +11,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -256,6 +257,12 @@ public class Register extends javax.swing.JFrame {
                 return; // Exit the method without proceeding to the next step
             }
 
+            // Check if an email already exists
+            if (isEmailExists(conn, email)) {
+                JOptionPane.showMessageDialog(this, "Email already exists. Please use a different email.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
             String queryAdd = "INSERT INTO users (username, name, email, password, created_at)" +
                     "VALUES (?, ?, ?, ?, NOW())";
@@ -331,4 +338,18 @@ public class Register extends javax.swing.JFrame {
     private javax.swing.JTextField usernameField;
     private javax.swing.JTextField nameField;
     // End of variables declaration//GEN-END:variables
+
+    private boolean isEmailExists(Connection conn, String email) throws SQLException {
+        String queryCheckEmail = "SELECT COUNT(*) FROM users WHERE email = ?";
+        try (PreparedStatement psCheckEmail = conn.prepareStatement(queryCheckEmail)) {
+            psCheckEmail.setString(1, email);
+            try (ResultSet rs = psCheckEmail.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
 }
