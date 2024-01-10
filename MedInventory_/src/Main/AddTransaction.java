@@ -380,6 +380,7 @@ public class AddTransaction extends javax.swing.JFrame {
                                 .addComponent(scrollPane)
                                 .addContainerGap(29, Short.MAX_VALUE))
         );
+        jPanel5.setPreferredSize(new Dimension(300, 470));
 
         jLabel16.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 18)); // NOI18N
         jLabel16.setText("Obat 02");

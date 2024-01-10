@@ -18,6 +18,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  *
@@ -95,7 +96,7 @@ public class TableObat extends javax.swing.JFrame {
 
         tambahObat.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 16)); // NOI18N
         tambahObat.setForeground(new java.awt.Color(19, 118, 248));
-        tambahObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/increase.png"))); // NOI18N
+        tambahObat.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/increase.png")))); // NOI18N
         tambahObat.setText("Tambah Obat Baru");
         tambahObat.setActionCommand("Tambah Obat Baru");
         tambahObat.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +129,7 @@ public class TableObat extends javax.swing.JFrame {
         refresh.setBackground(new java.awt.Color(19, 118, 248));
         refresh.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 13)); // NOI18N
         refresh.setForeground(new java.awt.Color(255, 255, 255));
-        refresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Main/refreshWhite.png"))); // NOI18N
+        refresh.setIcon(new javax.swing.ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/refreshWhite.png")))); // NOI18N
         refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshActionPerformed(evt);
@@ -145,7 +146,7 @@ public class TableObat extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
                                 .addComponent(refresh, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tambahObat, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tambahObat, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(hapusObat, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(21, 21, 21))
