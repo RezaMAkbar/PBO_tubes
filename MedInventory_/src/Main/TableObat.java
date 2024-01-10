@@ -567,4 +567,4 @@ public class TableObat extends javax.swing.JFrame {
         }
     }
 }
-//test
+//
