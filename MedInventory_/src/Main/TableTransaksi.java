@@ -483,10 +483,10 @@ public class TableTransaksi extends javax.swing.JFrame {
                         String catatan = rs.getString("catatan");
 
                         if ("penjualan".equals(tipe)) {
-                            Object[] row = {id, nama_obat, tipe, tanggal, username, total_harga_beli, jumlahBarang, nota, catatan, "Edit Data"};
+                            Object[] row = {id, nama_obat, tipe, tanggal, username, total_harga_jual, jumlahBarang, nota, catatan, "Edit Data"};
                             tableModel.addRow(row);
                         } else if ("restock".equals(tipe)) {
-                            Object[] row = {id, nama_obat, tipe, tanggal, username, total_harga_jual, jumlahBarang, nota, catatan, "Edit Data"};
+                            Object[] row = {id, nama_obat, tipe, tanggal, username, total_harga_beli, jumlahBarang, nota, catatan, "Edit Data"};
                             tableModel.addRow(row);
                         }
                         ButtonEditor buttonEditor = new ButtonEditor();

@@ -271,10 +271,9 @@ public class AddTransaction extends javax.swing.JFrame {
         jumlahObatTextField.setText("0000");
         jumlahObatTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jumlahObatTextFieldActionPerformed(evt);
+                calculateAndUpdate();
             }
         });
-
         jLabel8.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(19, 118, 248));
         jLabel8.setText("Jumlah Obat");
@@ -348,8 +347,6 @@ public class AddTransaction extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("List Obat");
 
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
 // Set the font for the text in the JTextArea
         Font textAreaFont = new Font("Plus Jakarta Sans", Font.PLAIN, 18);
         textArea.setFont(textAreaFont);
@@ -357,7 +354,14 @@ public class AddTransaction extends javax.swing.JFrame {
 // Set the initial text in the JTextArea
        // String initialText = "List Obat\n";
         textArea.setText("");
-        textArea.setPreferredSize(new Dimension(300, 435));
+        textArea.setMinimumSize(new Dimension(300, 1635));
+        textArea.setPreferredSize(new Dimension(300, 1635));
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setRows(20);
+        scrollPane = new JScrollPane(textArea);
+
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -365,16 +369,17 @@ public class AddTransaction extends javax.swing.JFrame {
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(scrollPane)  // Add the JScrollPane here
+                                .addComponent(scrollPane)
                                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
                 jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(scrollPane)  // Add the JScrollPane here
+                                .addComponent(scrollPane)
                                 .addContainerGap(29, Short.MAX_VALUE))
         );
+        jPanel5.setPreferredSize(new Dimension(300, 450));
 
         jLabel16.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 18)); // NOI18N
         jLabel16.setText("Obat 02");
@@ -745,6 +750,11 @@ public class AddTransaction extends javax.swing.JFrame {
                         "Catatan: " + catatanTextField.getText() + "\n\n";
 
                 textArea.append(entryText);
+                // Dynamically adjust the number of rows based on the content
+                int currentRowCount = textArea.getLineCount();
+                textArea.setRows(currentRowCount);
+                textArea.invalidate();
+                textArea.repaint();
             }
 
         } catch (Exception e) {
@@ -1175,5 +1185,24 @@ public class AddTransaction extends javax.swing.JFrame {
 
     private void showSuccessfulMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void calculateAndUpdate() {
+        try {
+            int selectedId = PopUpInputIDObat.getSelectedId();
+            setIdObat(selectedId);
+
+            String id = getIdObat();
+            Connection conn = connection();
+            ObatData obatData = fetchDataForTheId(conn, id);
+            double hargaObat = obatData.getHarga();
+
+            int currentText = Integer.parseInt(jumlahObatTextField.getText());
+
+            double currentValue = hargaObat * currentText;
+
+            totalHargaTextField.setText(String.valueOf(currentValue));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

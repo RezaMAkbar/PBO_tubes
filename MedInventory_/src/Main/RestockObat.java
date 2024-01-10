@@ -219,7 +219,7 @@ public class RestockObat extends javax.swing.JFrame {
         jumlahObatTextField.setText("0000");
         jumlahObatTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jumlahObatTextFieldActionPerformed(evt);
+                calculateAndUpdate();
             }
         });
 
@@ -260,7 +260,11 @@ public class RestockObat extends javax.swing.JFrame {
         reduceButton.setToolTipText("");
         reduceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reduceButtonActionPerformed(evt);
+                try {
+                    reduceButtonActionPerformed(evt);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -491,7 +495,7 @@ public class RestockObat extends javax.swing.JFrame {
     }//GEN-LAST:event_tanggalTransaksiTextFieldActionPerformed
 
     private void jumlahObatTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahObatTextFieldActionPerformed
-        // TODO add your handling code here:
+        calculateAndUpdate();
     }//GEN-LAST:event_jumlahObatTextFieldActionPerformed
 
     private void noNotaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noNotaTextFieldActionPerformed
@@ -621,8 +625,36 @@ public class RestockObat extends javax.swing.JFrame {
         //    System.out.println(formattedValue);
     }//GEN-LAST:event_addBarangButtonActionPerformed
 
-    private void reduceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reduceButtonActionPerformed
-        // TODO add your handling code here:
+    private void reduceButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_reduceButtonActionPerformed
+        int selectedId = PopUpInputIDObat.getSelectedId();
+        setIdObat(selectedId);
+
+        String id = getIdObat();
+        Connection conn = connection();
+        ObatData obatData = fetchDataForTheId(conn, id);
+
+        // Get current value from jumlahObatTextField
+        String currentText = jumlahObatTextField.getText();
+
+        // Parse current value as int
+        int currentValue = Integer.parseInt(currentText);
+
+        int newValue = currentValue - 1;
+
+        // Format new value as four digit string like = "0001"
+        String formattedValue = String.format("%04d", newValue);
+
+        // Set new value
+        jumlahObatTextField.setText(formattedValue);
+
+        if (obatData != null) {
+            double hargaObat = obatData.getHarga();
+            double price = hargaObat * newValue;
+
+            hargaTextField.setText(String.valueOf(price));
+        } else {
+            hargaTextField.setText("0.0"); // Set a default value
+        }
     }//GEN-LAST:event_reduceButtonActionPerformed
 
     private void catatanTextFieldActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_catatanTextFieldActionPerformed
@@ -922,5 +954,24 @@ public class RestockObat extends javax.swing.JFrame {
 
     private void showSuccessfulMessage(String message) {
         JOptionPane.showMessageDialog(this, message, "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+    }
+    private void calculateAndUpdate() {
+        try {
+            int selectedId = PopUpInputIDObat.getSelectedId();
+            setIdObat(selectedId);
+
+            String id = getIdObat();
+            Connection conn = connection();
+            ObatData obatData = fetchDataForTheId(conn, id);
+            double hargaObat = obatData.getHarga();
+
+            int currentText = Integer.parseInt(jumlahObatTextField.getText());
+
+            double currentValue = hargaObat * currentText;
+
+            hargaTextField.setText(String.valueOf(currentValue));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
