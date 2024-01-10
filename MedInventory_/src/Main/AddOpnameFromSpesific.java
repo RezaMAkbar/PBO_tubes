@@ -11,22 +11,23 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author gede.astugmail.com
  */
-public class AddOpname extends JFrame {
+public class AddOpnameFromSpesific extends JFrame {
 
     /**
      * Creates new form AddRiwayatTransaksi
      */
-    public AddOpname() {
+    public AddOpnameFromSpesific(int idObatFromTable) {
         initComponents();
+        this.idObatFromTable = idObatFromTable;
     }
 
     /**
@@ -116,7 +117,7 @@ public class AddOpname extends JFrame {
         tambahOpnameButton.setFont(new Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         tambahOpnameButton.setForeground(new Color(19, 118, 248));
         tambahOpnameButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/infuse.png")))); // NOI18N
-        tambahOpnameButton.setText("Ambil Data Obat");
+        tambahOpnameButton.setText("Ambil Data Obat Dengan ID: " + idObatFromTable);
         tambahOpnameButton.setBorder(new javax.swing.border.LineBorder(new Color(19, 118, 248), 3, true));
         tambahOpnameButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +151,7 @@ public class AddOpname extends JFrame {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(tambahTransaksiButton, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tambahOpnameButton, GroupLayout.PREFERRED_SIZE, 179, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tambahOpnameButton, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -166,7 +167,7 @@ public class AddOpname extends JFrame {
 
         jPanel3.setBackground(new Color(255, 255, 255));
 
-        idObatField.setText("ID Obat");
+        idObatField.setText(String.valueOf(idObatFromTable));
         idObatField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idObatFieldActionPerformed(evt);
@@ -202,7 +203,7 @@ public class AddOpname extends JFrame {
 
         jLabel6.setFont(new Font("Plus Jakarta Sans", 1, 24)); // NOI18N
         jLabel6.setForeground(new Color(19, 118, 248));
-        jLabel6.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/infuse.png")))); // NOI18N
+        jLabel6.setIcon(new ImageIcon(getClass().getResource("/Main/infuse.png"))); // NOI18N
         jLabel6.setText("Tambah Opname");
 
         emptyInputButton.setFont(new Font("Plus Jakarta Sans", 1, 13)); // NOI18N
@@ -279,7 +280,7 @@ public class AddOpname extends JFrame {
         });
 
         searchButton.setBackground(new Color(19, 118, 248));
-        searchButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Main/ic_sharp-search.png")))); // NOI18N
+        searchButton.setIcon(new ImageIcon(getClass().getResource("/Main/ic_sharp-search.png"))); // NOI18N
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -412,15 +413,10 @@ public class AddOpname extends JFrame {
     }//GEN-LAST:event_addTransactionButtonActionPerformed
 
     private void tambahOpnameButtonActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {//GEN-FIRST:event_addOpnameButtonActionPerformed
-        int selectedId = PopUpInputIDObat.getSelectedId();
-        setIdObat(selectedId);
-
-        String id = getIdObat();
-        //   System.out.println(id);
-        idObatField.setText(id);
+        String idNow = String.valueOf(idObatFromTable);
         Connection conn = connection();
-        TransaksiData transaksiData = fetchDataForTheIdWithSeparate(conn, id);
-        ObatData obatData = fetchDataForTheId(conn, id);
+        TransaksiData transaksiData = fetchDataForTheIdWithSeparate(conn, idNow);
+        ObatData obatData = fetchDataForTheId(conn, idNow);
 
         if (transaksiData != null) {
             int stockMasuk = transaksiData.getJumlahBarangMasuk();
@@ -440,10 +436,10 @@ public class AddOpname extends JFrame {
             double hargaObat = obatData.getHarga();
 
             // Concatenate namaObat and set it to idObatTextField
-            idObatField.setText(id + " (" + namaObat + ")");
+            idObatField.setText(idNow + " (" + namaObat + ")");
 
         } else {
-            idObatField.setText(id + " (Not Found)");
+            idObatField.setText(idNow + " (Not Found)");
         }
 
 
@@ -568,13 +564,13 @@ public class AddOpname extends JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddOpname.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddOpnameFromSpesific.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddOpname.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddOpnameFromSpesific.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddOpname.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddOpnameFromSpesific.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddOpname.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddOpnameFromSpesific.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -596,7 +592,7 @@ public class AddOpname extends JFrame {
         /* Create and display the form */
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddOpname().setVisible(true);
+                new AddOpnameFromSpesific(idObatFromTable).setVisible(true);
             }
         });
     }
@@ -633,6 +629,7 @@ public class AddOpname extends JFrame {
     private JTextField keteranganField;
     private JTextField stockMasukField;
     private String idObat;
+    private static int idObatFromTable;
     // End of variables declaration//GEN-END:variables
 
     private void clearTextFields(Container container) {
@@ -706,7 +703,7 @@ public class AddOpname extends JFrame {
         int selectedId = PopUpInputIDObat.getSelectedId();
         setIdObat(selectedId);
 
-        String id = getIdObat();
+        String id = String.valueOf(idObatFromTable);
         //  int selectedObatId = Integer.parseInt((String) Objects.requireNonNull(idObatComboBox.getSelectedItem()));
 
         String queryAdd = "INSERT INTO stok_opname (id_obat, tempat_simpan, tanggal_catat, stok_masuk, stok_keluar, sisa_stock, keterangan, created_at)" +

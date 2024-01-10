@@ -370,7 +370,7 @@ public class TableStockOpnameDetailed extends JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void addButtonActionPerformed(ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        AddOpname addOpname = new AddOpname();
+        AddOpnameFromSpesific addOpname = new AddOpnameFromSpesific(id);
         addOpname.setVisible(true);
     }//GEN-LAST:event_addButtonActionPerformed
 
