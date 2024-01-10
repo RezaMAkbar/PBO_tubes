@@ -274,6 +274,7 @@ public class AddTransaction extends javax.swing.JFrame {
                 calculateAndUpdate();
             }
         });
+
         jLabel8.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(19, 118, 248));
         jLabel8.setText("Jumlah Obat");
@@ -379,7 +380,6 @@ public class AddTransaction extends javax.swing.JFrame {
                                 .addComponent(scrollPane)
                                 .addContainerGap(29, Short.MAX_VALUE))
         );
-        jPanel5.setPreferredSize(new Dimension(300, 450));
 
         jLabel16.setFont(new java.awt.Font("Plus Jakarta Sans", 1, 18)); // NOI18N
         jLabel16.setText("Obat 02");
